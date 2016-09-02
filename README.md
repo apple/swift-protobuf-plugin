@@ -106,6 +106,8 @@ This will create a file `DataModel.pb.swift` with a `struct BookInfo` and a `str
 
 And of course, you can define your own Swift extensions to the generated `MyLibrary` struct to augment it with additional custom capabilities.
 
+Best of all, you can take the same `DataModel.proto` file and generate Java, C++, Python, or Objective-C for use on other platforms. Those platforms can all then exchange serialized data in binary or JSON forms, with no additional effort on your part.
+
 # Generated Code
 
 The following describes how each construct in a `.proto` file gets translated into Swift language constructs:
@@ -438,19 +440,17 @@ code generator.  You may need to patch the protoc sources in
 order to use these options.  (Patching protoc involves adding
 two lines to descriptor.proto and then running a shell script
 to regenerate protoc's support files before recompiling.  A
-standard patch file to help with this is provided with the
-protoc-gen-swift source code.)
+standard patch file to help with this is provided as part of the
+swift-protobuf-plugin project.)
 
 
 # TODO
 
 **RawMessage:** There should be a generic wrapper around the binary protobuf decode machinery that provides a way for clients to disassemble encoded messages into raw field data accessible by field tag.
 
-**Embedded Descriptors:** The full generated form should include embedded descriptors and a standard way to access them.
+**Embedded Descriptors:** There should be an option to include embedded descriptors and a standard way to access them.
 
 **Dynamic Messages:** There should be a generic wrapper that can accept a Descriptor or Type and provide generic decoding of a message.  This will likely build on RawMessage.
-
-**Performance testing:**  A big appeal of PB is the coder speed.  I've not yet done any serious benchmarking of the binary or JSON coders.
 
 **Text PB:**  There is an old text PB format that is supported by the old proto2 Java and C++ backends.  A few folks like it; it might be easy to add.
 
