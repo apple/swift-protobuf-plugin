@@ -1,0 +1,4 @@
+.build
+Packages
+protoc-gen-swift
+Test/_generated
