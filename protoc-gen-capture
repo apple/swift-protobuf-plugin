@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#
+# A trivial "plugin" for protoc that does nothing but write the
+# input data to a file on disk.  This is used to capture protoc
+# requests for playback testing.
+#
+
+cat > capture.proto.request
