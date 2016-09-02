@@ -12,7 +12,7 @@ _plugin_ that is itself written entirely in Swift.
 
 For more information about Swift Protobuf, please look at:
 * [Swift Protobuf Runtime Library](https://github.com/apple/swift-protobuf-runtime)
-* [Swift Protobuf Conformance Checker](https://github.com/apple/swift-protobuf-runtime)
+* [Swift Protobuf Conformance Checker](https://github.com/apple/swift-protobuf-test-conformance)
 
 ## Getting Started
 
