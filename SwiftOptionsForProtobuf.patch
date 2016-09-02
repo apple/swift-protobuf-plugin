@@ -26,10 +26,7 @@ diff --git a/src/google/protobuf/descriptor.proto b/src/google/protobuf/descript
 index 08b1555..4fb5f64 100644
 --- a/src/google/protobuf/descriptor.proto
 +++ b/src/google/protobuf/descriptor.proto
-@@ -370,20 +370,24 @@ message FileOptions {
-   optional bool cc_enable_arenas = 31 [default=false];
- 
- 
+@@ -370,12 +370,16 @@ message FileOptions {
    // Sets the objective c class prefix which is prepended to all objective c
    // generated classes from this .proto. There is no default.
    optional string objc_class_prefix = 36;
@@ -46,10 +43,3 @@ index 08b1555..4fb5f64 100644
  
    // Clients can define custom options in extensions of this message. See above.
    extensions 1000 to max;
- 
--  reserved 38;
-+  reserved 40;
- }
- 
- message MessageOptions {
-
