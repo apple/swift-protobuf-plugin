@@ -8,7 +8,7 @@ let package = Package(
         name: "protoc-gen-swift",
         dependencies: [
           .Package(
-              url: "https://gitlab.sd.apple.com/tkientzle/SwiftProtobufRuntime.git",
+              url: "https://github.com/apple/swift-protobuf-runtime.git",
               Version(0,9,13)
           ),
         ]
