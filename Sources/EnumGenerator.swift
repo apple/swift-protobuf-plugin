@@ -84,7 +84,7 @@ extension Google_Protobuf_EnumDescriptorProto {
             }
         }
         Stderr.print("Cannot find case `\(caseName)` in enum \(name!)")
-        assert(false)
+        precondition(false)
     }
 }
 

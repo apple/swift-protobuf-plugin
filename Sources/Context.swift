@@ -67,7 +67,7 @@ extension CodeGeneratorRequest {
                 return m
             }
         }
-        assert(false)
+        precondition(false)
     }
 }
 
