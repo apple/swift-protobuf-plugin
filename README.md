@@ -85,7 +85,7 @@ message MyLibrary {
    int64 id = 1;
    string name = 2;
    repeated BookInfo books = 3;
-   map<string,string> keys = 3;
+   map<string,string> keys = 4;
 }
 ```
 
