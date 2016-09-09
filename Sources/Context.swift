@@ -89,6 +89,7 @@ class Context {
             if protoNameIsGroup.contains(protoName) {
                 // TODO: Find a way to actually get to this line of code.
                 // Then fix it to be whatever it should be.
+                // If it can't be reached, assert an error in this case.
                 baseName = "XXGROUPXX_" + m.name! + "_XXGROUPXX"
             } else {
                 baseName = m.name!
