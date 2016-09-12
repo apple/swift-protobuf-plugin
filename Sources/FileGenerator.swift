@@ -197,29 +197,42 @@ class FileGenerator {
     }
 
     func commentsFor(path: [Int32]) -> String {
-        var text = ""
-        if let location = descriptor.locationFor(path: path) {
-            let trimmed = trimWhitespace(location.leadingComments ?? location.trailingComments ?? "")
-            if trimmed == "" {
-                return ""
-            }
-            let comments = " " + trimmed
+        func addLinePrefix(text: String, prefix: String) -> String {
+            var output = ""
             var atLineStart = true
-            for c in comments.characters {
+            for c in text.characters {
                 if atLineStart {
-                    text.append("///  ");
+                    if output == "" {
+                        output.append(prefix + " ")
+                    } else {
+                        output.append(prefix)
+                    }
                 }
                 if c == "\n" {
-                    text.append("\n")
+                    output.append("\n")
                     atLineStart = true
                 } else {
-                    text.append(c);
+                    output.append(c);
                     atLineStart = false
                 }
             }
-            text.append("\n")
+            return output
         }
-        return text
+
+        if let location = descriptor.locationFor(path: path) {
+            let leading = trimWhitespace(location.leadingDetachedComments.joined(separator: ""))
+            let trimmed = trimWhitespace(location.leadingComments ?? location.trailingComments ?? "")
+
+            let commentBlocks: [String] = [
+                addLinePrefix(text: leading, prefix: "// "),
+                addLinePrefix(text: trimmed, prefix: "///  ")
+            ]
+            let comments = commentBlocks.filter {$0 != ""}.joined(separator: "\n\n")
+            if comments != "" {
+                return comments + "\n"
+            }
+        }
+        return ""
     }
 
     func generateOutputFile(printer p: inout CodePrinter, context: Context) {
@@ -233,7 +246,17 @@ class FileGenerator {
             " * Source: \(inputFilename)\n",
             " *\n",
             " */\n",
-            "\n",
+            "\n")
+
+        // File header comments sometimes precede the 'syntax' field
+        // Carry those through if we can.
+        let comments = commentsFor(path: [12])
+        if comments != "" {
+            p.print(comments)
+            p.print("\n")
+        }
+
+        p.print(
             "import Protobuf\n",
             "\n")
 

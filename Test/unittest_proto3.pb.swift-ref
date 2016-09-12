@@ -6,10 +6,45 @@
  *
  */
 
+//  Protocol Buffers - Google's data interchange format
+//  Copyright 2008 Google Inc.  All rights reserved.
+//  https://developers.google.com/protocol-buffers/
+// 
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are
+//  met:
+// 
+//      * Redistributions of source code must retain the above copyright
+//  notice, this list of conditions and the following disclaimer.
+//      * Redistributions in binary form must reproduce the above
+//  copyright notice, this list of conditions and the following disclaimer
+//  in the documentation and/or other materials provided with the
+//  distribution.
+//      * Neither the name of Google Inc. nor the names of its
+//  contributors may be used to endorse or promote products derived from
+//  this software without specific prior written permission.
+// 
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+//  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+//  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+//  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+//  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+//  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+//  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+//  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+//  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+//  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//  Author: kenton@google.com (Kenton Varda)
+//   Based on original Protocol Buffers design by
+//   Sanjay Ghemawat, Jeff Dean, and others.
+// 
+//  A proto file we will use for unit testing.
+
 import Protobuf
 
 
-public enum Proto3ForeignEnum: ProtobufEnum {
+public enum ProtobufUnittest_ForeignEnum: ProtobufEnum {
   public typealias RawValue = Int
   case foreignUnspecified // = 0
   case foreignFoo // = 4
@@ -102,7 +137,7 @@ public enum Proto3ForeignEnum: ProtobufEnum {
 }
 
 ///   Test an enum that has multiple values with the same number.
-public enum Proto3TestEnumWithDupValue: ProtobufEnum {
+public enum ProtobufUnittest_TestEnumWithDupValue: ProtobufEnum {
   public typealias RawValue = Int
   case testEnumWithDupValueUnspecified // = 0
   case foo1 // = 1
@@ -209,7 +244,7 @@ public enum Proto3TestEnumWithDupValue: ProtobufEnum {
 }
 
 ///   Test an enum with large, unordered values.
-public enum Proto3TestSparseEnum: ProtobufEnum {
+public enum ProtobufUnittest_TestSparseEnum: ProtobufEnum {
   public typealias RawValue = Int
   case testSparseEnumUnspecified // = 0
   case sparseA // = 123
@@ -330,8 +365,8 @@ public enum Proto3TestSparseEnum: ProtobufEnum {
 
 ///   This proto includes every type of field in both singular and repeated
 ///   forms.
-public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestAllTypes"}
+public struct ProtobufUnittest_TestAllTypes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestAllTypes"}
   public var protoMessageName: String {return "TestAllTypes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -436,7 +471,7 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestAllTypes
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestAllTypes
     var _singleInt32: Int32 = 0
     var _singleInt64: Int64 = 0
     var _singleUint32: UInt32 = 0
@@ -452,13 +487,13 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     var _singleBool: Bool = false
     var _singleString: String = ""
     var _singleBytes: [UInt8] = []
-    var _singleNestedMessage: Proto3TestAllTypes.NestedMessage? = nil
-    var _singleForeignMessage: Proto3ForeignMessage? = nil
-    var _singleImportMessage: Proto3ImportMessage? = nil
-    var _singleNestedEnum: Proto3TestAllTypes.NestedEnum = Proto3TestAllTypes.NestedEnum.nestedEnumUnspecified
-    var _singleForeignEnum: Proto3ForeignEnum = Proto3ForeignEnum.foreignUnspecified
-    var _singleImportEnum: Proto3ImportEnum = Proto3ImportEnum.importEnumUnspecified
-    var _singlePublicImportMessage: Proto3PublicImportMessage? = nil
+    var _singleNestedMessage: ProtobufUnittest_TestAllTypes.NestedMessage? = nil
+    var _singleForeignMessage: ProtobufUnittest_ForeignMessage? = nil
+    var _singleImportMessage: ProtobufUnittestImport_ImportMessage? = nil
+    var _singleNestedEnum: ProtobufUnittest_TestAllTypes.NestedEnum = ProtobufUnittest_TestAllTypes.NestedEnum.nestedEnumUnspecified
+    var _singleForeignEnum: ProtobufUnittest_ForeignEnum = ProtobufUnittest_ForeignEnum.foreignUnspecified
+    var _singleImportEnum: ProtobufUnittestImport_ImportEnum = ProtobufUnittestImport_ImportEnum.importEnumUnspecified
+    var _singlePublicImportMessage: ProtobufUnittestImport_PublicImportMessage? = nil
     var _repeatedInt32: [Int32] = []
     var _repeatedInt64: [Int64] = []
     var _repeatedUint32: [UInt32] = []
@@ -474,14 +509,14 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     var _repeatedBool: [Bool] = []
     var _repeatedString: [String] = []
     var _repeatedBytes: [[UInt8]] = []
-    var _repeatedNestedMessage: [Proto3TestAllTypes.NestedMessage] = []
-    var _repeatedForeignMessage: [Proto3ForeignMessage] = []
-    var _repeatedImportMessage: [Proto3ImportMessage] = []
-    var _repeatedNestedEnum: [Proto3TestAllTypes.NestedEnum] = []
-    var _repeatedForeignEnum: [Proto3ForeignEnum] = []
-    var _repeatedImportEnum: [Proto3ImportEnum] = []
-    var _repeatedPublicImportMessage: [Proto3PublicImportMessage] = []
-    var _oneofField = Proto3TestAllTypes.OneOf_OneofField()
+    var _repeatedNestedMessage: [ProtobufUnittest_TestAllTypes.NestedMessage] = []
+    var _repeatedForeignMessage: [ProtobufUnittest_ForeignMessage] = []
+    var _repeatedImportMessage: [ProtobufUnittestImport_ImportMessage] = []
+    var _repeatedNestedEnum: [ProtobufUnittest_TestAllTypes.NestedEnum] = []
+    var _repeatedForeignEnum: [ProtobufUnittest_ForeignEnum] = []
+    var _repeatedImportEnum: [ProtobufUnittestImport_ImportEnum] = []
+    var _repeatedPublicImportMessage: [ProtobufUnittestImport_PublicImportMessage] = []
+    var _oneofField = ProtobufUnittest_TestAllTypes.OneOf_OneofField()
 
     init() {}
 
@@ -503,13 +538,13 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
       case 13: handled = try setter.decodeSingularField(fieldType: ProtobufBool.self, value: &_singleBool)
       case 14: handled = try setter.decodeSingularField(fieldType: ProtobufString.self, value: &_singleString)
       case 15: handled = try setter.decodeSingularField(fieldType: ProtobufBytes.self, value: &_singleBytes)
-      case 18: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestAllTypes.NestedMessage.self, value: &_singleNestedMessage)
-      case 19: handled = try setter.decodeSingularMessageField(fieldType: Proto3ForeignMessage.self, value: &_singleForeignMessage)
-      case 20: handled = try setter.decodeSingularMessageField(fieldType: Proto3ImportMessage.self, value: &_singleImportMessage)
-      case 21: handled = try setter.decodeSingularField(fieldType: Proto3TestAllTypes.NestedEnum.self, value: &_singleNestedEnum)
-      case 22: handled = try setter.decodeSingularField(fieldType: Proto3ForeignEnum.self, value: &_singleForeignEnum)
-      case 23: handled = try setter.decodeSingularField(fieldType: Proto3ImportEnum.self, value: &_singleImportEnum)
-      case 26: handled = try setter.decodeSingularMessageField(fieldType: Proto3PublicImportMessage.self, value: &_singlePublicImportMessage)
+      case 18: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestAllTypes.NestedMessage.self, value: &_singleNestedMessage)
+      case 19: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_ForeignMessage.self, value: &_singleForeignMessage)
+      case 20: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittestImport_ImportMessage.self, value: &_singleImportMessage)
+      case 21: handled = try setter.decodeSingularField(fieldType: ProtobufUnittest_TestAllTypes.NestedEnum.self, value: &_singleNestedEnum)
+      case 22: handled = try setter.decodeSingularField(fieldType: ProtobufUnittest_ForeignEnum.self, value: &_singleForeignEnum)
+      case 23: handled = try setter.decodeSingularField(fieldType: ProtobufUnittestImport_ImportEnum.self, value: &_singleImportEnum)
+      case 26: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittestImport_PublicImportMessage.self, value: &_singlePublicImportMessage)
       case 31: handled = try setter.decodePackedField(fieldType: ProtobufInt32.self, value: &_repeatedInt32)
       case 32: handled = try setter.decodePackedField(fieldType: ProtobufInt64.self, value: &_repeatedInt64)
       case 33: handled = try setter.decodePackedField(fieldType: ProtobufUInt32.self, value: &_repeatedUint32)
@@ -525,13 +560,13 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
       case 43: handled = try setter.decodePackedField(fieldType: ProtobufBool.self, value: &_repeatedBool)
       case 44: handled = try setter.decodeRepeatedField(fieldType: ProtobufString.self, value: &_repeatedString)
       case 45: handled = try setter.decodeRepeatedField(fieldType: ProtobufBytes.self, value: &_repeatedBytes)
-      case 48: handled = try setter.decodeRepeatedMessageField(fieldType: Proto3TestAllTypes.NestedMessage.self, value: &_repeatedNestedMessage)
-      case 49: handled = try setter.decodeRepeatedMessageField(fieldType: Proto3ForeignMessage.self, value: &_repeatedForeignMessage)
-      case 50: handled = try setter.decodeRepeatedMessageField(fieldType: Proto3ImportMessage.self, value: &_repeatedImportMessage)
-      case 51: handled = try setter.decodePackedField(fieldType: Proto3TestAllTypes.NestedEnum.self, value: &_repeatedNestedEnum)
-      case 52: handled = try setter.decodePackedField(fieldType: Proto3ForeignEnum.self, value: &_repeatedForeignEnum)
-      case 53: handled = try setter.decodePackedField(fieldType: Proto3ImportEnum.self, value: &_repeatedImportEnum)
-      case 54: handled = try setter.decodeRepeatedMessageField(fieldType: Proto3PublicImportMessage.self, value: &_repeatedPublicImportMessage)
+      case 48: handled = try setter.decodeRepeatedMessageField(fieldType: ProtobufUnittest_TestAllTypes.NestedMessage.self, value: &_repeatedNestedMessage)
+      case 49: handled = try setter.decodeRepeatedMessageField(fieldType: ProtobufUnittest_ForeignMessage.self, value: &_repeatedForeignMessage)
+      case 50: handled = try setter.decodeRepeatedMessageField(fieldType: ProtobufUnittestImport_ImportMessage.self, value: &_repeatedImportMessage)
+      case 51: handled = try setter.decodePackedField(fieldType: ProtobufUnittest_TestAllTypes.NestedEnum.self, value: &_repeatedNestedEnum)
+      case 52: handled = try setter.decodePackedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: &_repeatedForeignEnum)
+      case 53: handled = try setter.decodePackedField(fieldType: ProtobufUnittestImport_ImportEnum.self, value: &_repeatedImportEnum)
+      case 54: handled = try setter.decodeRepeatedMessageField(fieldType: ProtobufUnittestImport_PublicImportMessage.self, value: &_repeatedPublicImportMessage)
       case 111, 112, 113, 114:
         handled = try _oneofField.decodeField(setter: &setter, protoFieldNumber: protoFieldNumber)
       default:
@@ -595,14 +630,14 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
       if let v = _singleImportMessage {
         try visitor.visitSingularMessageField(value: v, protoFieldNumber: 20, protoFieldName: "single_import_message", jsonFieldName: "singleImportMessage", swiftFieldName: "singleImportMessage")
       }
-      if _singleNestedEnum != Proto3TestAllTypes.NestedEnum.nestedEnumUnspecified {
-        try visitor.visitSingularField(fieldType: Proto3TestAllTypes.NestedEnum.self, value: _singleNestedEnum, protoFieldNumber: 21, protoFieldName: "single_nested_enum", jsonFieldName: "singleNestedEnum", swiftFieldName: "singleNestedEnum")
+      if _singleNestedEnum != ProtobufUnittest_TestAllTypes.NestedEnum.nestedEnumUnspecified {
+        try visitor.visitSingularField(fieldType: ProtobufUnittest_TestAllTypes.NestedEnum.self, value: _singleNestedEnum, protoFieldNumber: 21, protoFieldName: "single_nested_enum", jsonFieldName: "singleNestedEnum", swiftFieldName: "singleNestedEnum")
       }
-      if _singleForeignEnum != Proto3ForeignEnum.foreignUnspecified {
-        try visitor.visitSingularField(fieldType: Proto3ForeignEnum.self, value: _singleForeignEnum, protoFieldNumber: 22, protoFieldName: "single_foreign_enum", jsonFieldName: "singleForeignEnum", swiftFieldName: "singleForeignEnum")
+      if _singleForeignEnum != ProtobufUnittest_ForeignEnum.foreignUnspecified {
+        try visitor.visitSingularField(fieldType: ProtobufUnittest_ForeignEnum.self, value: _singleForeignEnum, protoFieldNumber: 22, protoFieldName: "single_foreign_enum", jsonFieldName: "singleForeignEnum", swiftFieldName: "singleForeignEnum")
       }
-      if _singleImportEnum != Proto3ImportEnum.importEnumUnspecified {
-        try visitor.visitSingularField(fieldType: Proto3ImportEnum.self, value: _singleImportEnum, protoFieldNumber: 23, protoFieldName: "single_import_enum", jsonFieldName: "singleImportEnum", swiftFieldName: "singleImportEnum")
+      if _singleImportEnum != ProtobufUnittestImport_ImportEnum.importEnumUnspecified {
+        try visitor.visitSingularField(fieldType: ProtobufUnittestImport_ImportEnum.self, value: _singleImportEnum, protoFieldNumber: 23, protoFieldName: "single_import_enum", jsonFieldName: "singleImportEnum", swiftFieldName: "singleImportEnum")
       }
       if let v = _singlePublicImportMessage {
         try visitor.visitSingularMessageField(value: v, protoFieldNumber: 26, protoFieldName: "single_public_import_message", jsonFieldName: "singlePublicImportMessage", swiftFieldName: "singlePublicImportMessage")
@@ -662,13 +697,13 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
         try visitor.visitRepeatedMessageField(value: _repeatedImportMessage, protoFieldNumber: 50, protoFieldName: "repeated_import_message", jsonFieldName: "repeatedImportMessage", swiftFieldName: "repeatedImportMessage")
       }
       if !_repeatedNestedEnum.isEmpty {
-        try visitor.visitPackedField(fieldType: Proto3TestAllTypes.NestedEnum.self, value: _repeatedNestedEnum, protoFieldNumber: 51, protoFieldName: "repeated_nested_enum", jsonFieldName: "repeatedNestedEnum", swiftFieldName: "repeatedNestedEnum")
+        try visitor.visitPackedField(fieldType: ProtobufUnittest_TestAllTypes.NestedEnum.self, value: _repeatedNestedEnum, protoFieldNumber: 51, protoFieldName: "repeated_nested_enum", jsonFieldName: "repeatedNestedEnum", swiftFieldName: "repeatedNestedEnum")
       }
       if !_repeatedForeignEnum.isEmpty {
-        try visitor.visitPackedField(fieldType: Proto3ForeignEnum.self, value: _repeatedForeignEnum, protoFieldNumber: 52, protoFieldName: "repeated_foreign_enum", jsonFieldName: "repeatedForeignEnum", swiftFieldName: "repeatedForeignEnum")
+        try visitor.visitPackedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: _repeatedForeignEnum, protoFieldNumber: 52, protoFieldName: "repeated_foreign_enum", jsonFieldName: "repeatedForeignEnum", swiftFieldName: "repeatedForeignEnum")
       }
       if !_repeatedImportEnum.isEmpty {
-        try visitor.visitPackedField(fieldType: Proto3ImportEnum.self, value: _repeatedImportEnum, protoFieldNumber: 53, protoFieldName: "repeated_import_enum", jsonFieldName: "repeatedImportEnum", swiftFieldName: "repeatedImportEnum")
+        try visitor.visitPackedField(fieldType: ProtobufUnittestImport_ImportEnum.self, value: _repeatedImportEnum, protoFieldNumber: 53, protoFieldName: "repeated_import_enum", jsonFieldName: "repeatedImportEnum", swiftFieldName: "repeatedImportEnum")
       }
       if !_repeatedPublicImportMessage.isEmpty {
         try visitor.visitRepeatedMessageField(value: _repeatedPublicImportMessage, protoFieldNumber: 54, protoFieldName: "repeated_public_import_message", jsonFieldName: "repeatedPublicImportMessage", swiftFieldName: "repeatedPublicImportMessage")
@@ -695,9 +730,9 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
       if _singleNestedMessage != nil {return false}
       if _singleForeignMessage != nil {return false}
       if _singleImportMessage != nil {return false}
-      if _singleNestedEnum != Proto3TestAllTypes.NestedEnum.nestedEnumUnspecified {return false}
-      if _singleForeignEnum != Proto3ForeignEnum.foreignUnspecified {return false}
-      if _singleImportEnum != Proto3ImportEnum.importEnumUnspecified {return false}
+      if _singleNestedEnum != ProtobufUnittest_TestAllTypes.NestedEnum.nestedEnumUnspecified {return false}
+      if _singleForeignEnum != ProtobufUnittest_ForeignEnum.foreignUnspecified {return false}
+      if _singleImportEnum != ProtobufUnittestImport_ImportEnum.importEnumUnspecified {return false}
       if _singlePublicImportMessage != nil {return false}
       if !_repeatedInt32.isEmpty {return false}
       if !_repeatedInt64.isEmpty {return false}
@@ -829,7 +864,7 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
 
   public enum OneOf_OneofField: ExpressibleByNilLiteral, ProtobufOneofEnum {
     case oneofUint32(UInt32)
-    case oneofNestedMessage(Proto3TestAllTypes.NestedMessage)
+    case oneofNestedMessage(ProtobufUnittest_TestAllTypes.NestedMessage)
     case oneofString(String)
     case oneofBytes([UInt8])
     case None
@@ -853,8 +888,8 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
         handled = try setter.decodeSingularField(fieldType: ProtobufUInt32.self, value: &value)
         self = .oneofUint32(value)
       case 112:
-        var value: Proto3TestAllTypes.NestedMessage?
-        handled = try setter.decodeSingularMessageField(fieldType: Proto3TestAllTypes.NestedMessage.self, value: &value)
+        var value: ProtobufUnittest_TestAllTypes.NestedMessage?
+        handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestAllTypes.NestedMessage.self, value: &value)
         if let value = value, handled {
           self = .oneofNestedMessage(value)
         }
@@ -1002,7 +1037,7 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
   }
 
   public struct NestedMessage: ProtobufGeneratedMessage {
-    public var swiftClassName: String {return "Proto3TestAllTypes.NestedMessage"}
+    public var swiftClassName: String {return "ProtobufUnittest_TestAllTypes.NestedMessage"}
     public var protoMessageName: String {return "NestedMessage"}
     public var protoPackageName: String {return "protobuf_unittest"}
     public var jsonFieldNames: [String: Int] {return [
@@ -1047,7 +1082,7 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
       return true
     }
 
-    public func _protoc_generated_isEqualTo(other: Proto3TestAllTypes.NestedMessage) -> Bool {
+    public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestAllTypes.NestedMessage) -> Bool {
       if bb != other.bb {return false}
       return true
     }
@@ -1129,39 +1164,39 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     set {_uniqueStorage()._singleBytes = newValue}
   }
 
-  public var singleNestedMessage: Proto3TestAllTypes.NestedMessage {
-    get {return _storage?._singleNestedMessage ?? Proto3TestAllTypes.NestedMessage()}
+  public var singleNestedMessage: ProtobufUnittest_TestAllTypes.NestedMessage {
+    get {return _storage?._singleNestedMessage ?? ProtobufUnittest_TestAllTypes.NestedMessage()}
     set {_uniqueStorage()._singleNestedMessage = newValue}
   }
 
-  public var singleForeignMessage: Proto3ForeignMessage {
-    get {return _storage?._singleForeignMessage ?? Proto3ForeignMessage()}
+  public var singleForeignMessage: ProtobufUnittest_ForeignMessage {
+    get {return _storage?._singleForeignMessage ?? ProtobufUnittest_ForeignMessage()}
     set {_uniqueStorage()._singleForeignMessage = newValue}
   }
 
-  public var singleImportMessage: Proto3ImportMessage {
-    get {return _storage?._singleImportMessage ?? Proto3ImportMessage()}
+  public var singleImportMessage: ProtobufUnittestImport_ImportMessage {
+    get {return _storage?._singleImportMessage ?? ProtobufUnittestImport_ImportMessage()}
     set {_uniqueStorage()._singleImportMessage = newValue}
   }
 
-  public var singleNestedEnum: Proto3TestAllTypes.NestedEnum {
-    get {return _storage?._singleNestedEnum ?? Proto3TestAllTypes.NestedEnum.nestedEnumUnspecified}
+  public var singleNestedEnum: ProtobufUnittest_TestAllTypes.NestedEnum {
+    get {return _storage?._singleNestedEnum ?? ProtobufUnittest_TestAllTypes.NestedEnum.nestedEnumUnspecified}
     set {_uniqueStorage()._singleNestedEnum = newValue}
   }
 
-  public var singleForeignEnum: Proto3ForeignEnum {
-    get {return _storage?._singleForeignEnum ?? Proto3ForeignEnum.foreignUnspecified}
+  public var singleForeignEnum: ProtobufUnittest_ForeignEnum {
+    get {return _storage?._singleForeignEnum ?? ProtobufUnittest_ForeignEnum.foreignUnspecified}
     set {_uniqueStorage()._singleForeignEnum = newValue}
   }
 
-  public var singleImportEnum: Proto3ImportEnum {
-    get {return _storage?._singleImportEnum ?? Proto3ImportEnum.importEnumUnspecified}
+  public var singleImportEnum: ProtobufUnittestImport_ImportEnum {
+    get {return _storage?._singleImportEnum ?? ProtobufUnittestImport_ImportEnum.importEnumUnspecified}
     set {_uniqueStorage()._singleImportEnum = newValue}
   }
 
   ///   Defined in unittest_import_public.proto
-  public var singlePublicImportMessage: Proto3PublicImportMessage {
-    get {return _storage?._singlePublicImportMessage ?? Proto3PublicImportMessage()}
+  public var singlePublicImportMessage: ProtobufUnittestImport_PublicImportMessage {
+    get {return _storage?._singlePublicImportMessage ?? ProtobufUnittestImport_PublicImportMessage()}
     set {_uniqueStorage()._singlePublicImportMessage = newValue}
   }
 
@@ -1241,38 +1276,38 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     set {_uniqueStorage()._repeatedBytes = newValue}
   }
 
-  public var repeatedNestedMessage: [Proto3TestAllTypes.NestedMessage] {
+  public var repeatedNestedMessage: [ProtobufUnittest_TestAllTypes.NestedMessage] {
     get {return _storage?._repeatedNestedMessage ?? []}
     set {_uniqueStorage()._repeatedNestedMessage = newValue}
   }
 
-  public var repeatedForeignMessage: [Proto3ForeignMessage] {
+  public var repeatedForeignMessage: [ProtobufUnittest_ForeignMessage] {
     get {return _storage?._repeatedForeignMessage ?? []}
     set {_uniqueStorage()._repeatedForeignMessage = newValue}
   }
 
-  public var repeatedImportMessage: [Proto3ImportMessage] {
+  public var repeatedImportMessage: [ProtobufUnittestImport_ImportMessage] {
     get {return _storage?._repeatedImportMessage ?? []}
     set {_uniqueStorage()._repeatedImportMessage = newValue}
   }
 
-  public var repeatedNestedEnum: [Proto3TestAllTypes.NestedEnum] {
+  public var repeatedNestedEnum: [ProtobufUnittest_TestAllTypes.NestedEnum] {
     get {return _storage?._repeatedNestedEnum ?? []}
     set {_uniqueStorage()._repeatedNestedEnum = newValue}
   }
 
-  public var repeatedForeignEnum: [Proto3ForeignEnum] {
+  public var repeatedForeignEnum: [ProtobufUnittest_ForeignEnum] {
     get {return _storage?._repeatedForeignEnum ?? []}
     set {_uniqueStorage()._repeatedForeignEnum = newValue}
   }
 
-  public var repeatedImportEnum: [Proto3ImportEnum] {
+  public var repeatedImportEnum: [ProtobufUnittestImport_ImportEnum] {
     get {return _storage?._repeatedImportEnum ?? []}
     set {_uniqueStorage()._repeatedImportEnum = newValue}
   }
 
   ///   Defined in unittest_import_public.proto
-  public var repeatedPublicImportMessage: [Proto3PublicImportMessage] {
+  public var repeatedPublicImportMessage: [ProtobufUnittestImport_PublicImportMessage] {
     get {return _storage?._repeatedPublicImportMessage ?? []}
     set {_uniqueStorage()._repeatedPublicImportMessage = newValue}
   }
@@ -1295,7 +1330,7 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     }
   }
 
-  public var oneofNestedMessage: Proto3TestAllTypes.NestedMessage? {
+  public var oneofNestedMessage: ProtobufUnittest_TestAllTypes.NestedMessage? {
     get {
       if let storage = _storage {
         if case .oneofNestedMessage(let v) = storage._oneofField {
@@ -1373,13 +1408,13 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     singleBool: Bool? = nil,
     singleString: String? = nil,
     singleBytes: [UInt8]? = nil,
-    singleNestedMessage: Proto3TestAllTypes.NestedMessage? = nil,
-    singleForeignMessage: Proto3ForeignMessage? = nil,
-    singleImportMessage: Proto3ImportMessage? = nil,
-    singleNestedEnum: Proto3TestAllTypes.NestedEnum? = nil,
-    singleForeignEnum: Proto3ForeignEnum? = nil,
-    singleImportEnum: Proto3ImportEnum? = nil,
-    singlePublicImportMessage: Proto3PublicImportMessage? = nil,
+    singleNestedMessage: ProtobufUnittest_TestAllTypes.NestedMessage? = nil,
+    singleForeignMessage: ProtobufUnittest_ForeignMessage? = nil,
+    singleImportMessage: ProtobufUnittestImport_ImportMessage? = nil,
+    singleNestedEnum: ProtobufUnittest_TestAllTypes.NestedEnum? = nil,
+    singleForeignEnum: ProtobufUnittest_ForeignEnum? = nil,
+    singleImportEnum: ProtobufUnittestImport_ImportEnum? = nil,
+    singlePublicImportMessage: ProtobufUnittestImport_PublicImportMessage? = nil,
     repeatedInt32: [Int32] = [],
     repeatedInt64: [Int64] = [],
     repeatedUint32: [UInt32] = [],
@@ -1395,15 +1430,15 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
     repeatedBool: [Bool] = [],
     repeatedString: [String] = [],
     repeatedBytes: [[UInt8]] = [],
-    repeatedNestedMessage: [Proto3TestAllTypes.NestedMessage] = [],
-    repeatedForeignMessage: [Proto3ForeignMessage] = [],
-    repeatedImportMessage: [Proto3ImportMessage] = [],
-    repeatedNestedEnum: [Proto3TestAllTypes.NestedEnum] = [],
-    repeatedForeignEnum: [Proto3ForeignEnum] = [],
-    repeatedImportEnum: [Proto3ImportEnum] = [],
-    repeatedPublicImportMessage: [Proto3PublicImportMessage] = [],
+    repeatedNestedMessage: [ProtobufUnittest_TestAllTypes.NestedMessage] = [],
+    repeatedForeignMessage: [ProtobufUnittest_ForeignMessage] = [],
+    repeatedImportMessage: [ProtobufUnittestImport_ImportMessage] = [],
+    repeatedNestedEnum: [ProtobufUnittest_TestAllTypes.NestedEnum] = [],
+    repeatedForeignEnum: [ProtobufUnittest_ForeignEnum] = [],
+    repeatedImportEnum: [ProtobufUnittestImport_ImportEnum] = [],
+    repeatedPublicImportMessage: [ProtobufUnittestImport_PublicImportMessage] = [],
     oneofUint32: UInt32? = nil,
-    oneofNestedMessage: Proto3TestAllTypes.NestedMessage? = nil,
+    oneofNestedMessage: ProtobufUnittest_TestAllTypes.NestedMessage? = nil,
     oneofString: String? = nil,
     oneofBytes: [UInt8]? = nil)
   {
@@ -1556,7 +1591,7 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestAllTypes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestAllTypes) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -1579,8 +1614,8 @@ public struct Proto3TestAllTypes: ProtobufGeneratedMessage {
 }
 
 ///   This proto includes a recusively nested message.
-public struct Proto3NestedTestAllTypes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3NestedTestAllTypes"}
+public struct ProtobufUnittest_NestedTestAllTypes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_NestedTestAllTypes"}
   public var protoMessageName: String {return "NestedTestAllTypes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -1595,19 +1630,19 @@ public struct Proto3NestedTestAllTypes: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3NestedTestAllTypes
-    var _child: Proto3NestedTestAllTypes? = nil
-    var _payload: Proto3TestAllTypes? = nil
-    var _repeatedChild: [Proto3NestedTestAllTypes] = []
+    typealias ProtobufExtendedMessage = ProtobufUnittest_NestedTestAllTypes
+    var _child: ProtobufUnittest_NestedTestAllTypes? = nil
+    var _payload: ProtobufUnittest_TestAllTypes? = nil
+    var _repeatedChild: [ProtobufUnittest_NestedTestAllTypes] = []
 
     init() {}
 
     func decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool {
       let handled: Bool
       switch protoFieldNumber {
-      case 1: handled = try setter.decodeSingularMessageField(fieldType: Proto3NestedTestAllTypes.self, value: &_child)
-      case 2: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestAllTypes.self, value: &_payload)
-      case 3: handled = try setter.decodeRepeatedMessageField(fieldType: Proto3NestedTestAllTypes.self, value: &_repeatedChild)
+      case 1: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_NestedTestAllTypes.self, value: &_child)
+      case 2: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestAllTypes.self, value: &_payload)
+      case 3: handled = try setter.decodeRepeatedMessageField(fieldType: ProtobufUnittest_NestedTestAllTypes.self, value: &_repeatedChild)
       default:
         handled = false
       }
@@ -1651,26 +1686,26 @@ public struct Proto3NestedTestAllTypes: ProtobufGeneratedMessage {
 
   private var _storage: _StorageClass?
 
-  public var child: Proto3NestedTestAllTypes {
-    get {return _storage?._child ?? Proto3NestedTestAllTypes()}
+  public var child: ProtobufUnittest_NestedTestAllTypes {
+    get {return _storage?._child ?? ProtobufUnittest_NestedTestAllTypes()}
     set {_uniqueStorage()._child = newValue}
   }
 
-  public var payload: Proto3TestAllTypes {
-    get {return _storage?._payload ?? Proto3TestAllTypes()}
+  public var payload: ProtobufUnittest_TestAllTypes {
+    get {return _storage?._payload ?? ProtobufUnittest_TestAllTypes()}
     set {_uniqueStorage()._payload = newValue}
   }
 
-  public var repeatedChild: [Proto3NestedTestAllTypes] {
+  public var repeatedChild: [ProtobufUnittest_NestedTestAllTypes] {
     get {return _storage?._repeatedChild ?? []}
     set {_uniqueStorage()._repeatedChild = newValue}
   }
 
   public init() {}
 
-  public init(child: Proto3NestedTestAllTypes? = nil,
-    payload: Proto3TestAllTypes? = nil,
-    repeatedChild: [Proto3NestedTestAllTypes] = [])
+  public init(child: ProtobufUnittest_NestedTestAllTypes? = nil,
+    payload: ProtobufUnittest_TestAllTypes? = nil,
+    repeatedChild: [ProtobufUnittest_NestedTestAllTypes] = [])
   {
     let storage = _uniqueStorage()
     storage._child = child
@@ -1690,7 +1725,7 @@ public struct Proto3NestedTestAllTypes: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3NestedTestAllTypes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_NestedTestAllTypes) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -1712,8 +1747,8 @@ public struct Proto3NestedTestAllTypes: ProtobufGeneratedMessage {
   }
 }
 
-public struct Proto3TestDeprecatedFields: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestDeprecatedFields"}
+public struct ProtobufUnittest_TestDeprecatedFields: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestDeprecatedFields"}
   public var protoMessageName: String {return "TestDeprecatedFields"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -1755,7 +1790,7 @@ public struct Proto3TestDeprecatedFields: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestDeprecatedFields) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestDeprecatedFields) -> Bool {
     if deprecatedInt32 != other.deprecatedInt32 {return false}
     return true
   }
@@ -1763,8 +1798,8 @@ public struct Proto3TestDeprecatedFields: ProtobufGeneratedMessage {
 
 ///   Define these after TestAllTypes to make sure the compiler can handle
 ///   that.
-public struct Proto3ForeignMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3ForeignMessage"}
+public struct ProtobufUnittest_ForeignMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_ForeignMessage"}
   public var protoMessageName: String {return "ForeignMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -1806,14 +1841,14 @@ public struct Proto3ForeignMessage: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3ForeignMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_ForeignMessage) -> Bool {
     if c != other.c {return false}
     return true
   }
 }
 
-public struct Proto3TestReservedFields: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestReservedFields"}
+public struct ProtobufUnittest_TestReservedFields: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestReservedFields"}
   public var protoMessageName: String {return "TestReservedFields"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -1830,14 +1865,14 @@ public struct Proto3TestReservedFields: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestReservedFields) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestReservedFields) -> Bool {
     return true
   }
 }
 
 ///   Test that we can use NestedMessage from outside TestAllTypes.
-public struct Proto3TestForeignNested: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestForeignNested"}
+public struct ProtobufUnittest_TestForeignNested: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestForeignNested"}
   public var protoMessageName: String {return "TestForeignNested"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -1848,15 +1883,15 @@ public struct Proto3TestForeignNested: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestForeignNested
-    var _foreignNested: Proto3TestAllTypes.NestedMessage? = nil
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestForeignNested
+    var _foreignNested: ProtobufUnittest_TestAllTypes.NestedMessage? = nil
 
     init() {}
 
     func decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool {
       let handled: Bool
       switch protoFieldNumber {
-      case 1: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestAllTypes.NestedMessage.self, value: &_foreignNested)
+      case 1: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestAllTypes.NestedMessage.self, value: &_foreignNested)
       default:
         handled = false
       }
@@ -1888,14 +1923,14 @@ public struct Proto3TestForeignNested: ProtobufGeneratedMessage {
 
   private var _storage: _StorageClass?
 
-  public var foreignNested: Proto3TestAllTypes.NestedMessage {
-    get {return _storage?._foreignNested ?? Proto3TestAllTypes.NestedMessage()}
+  public var foreignNested: ProtobufUnittest_TestAllTypes.NestedMessage {
+    get {return _storage?._foreignNested ?? ProtobufUnittest_TestAllTypes.NestedMessage()}
     set {_uniqueStorage()._foreignNested = newValue}
   }
 
   public init() {}
 
-  public init(foreignNested: Proto3TestAllTypes.NestedMessage? = nil)
+  public init(foreignNested: ProtobufUnittest_TestAllTypes.NestedMessage? = nil)
   {
     let storage = _uniqueStorage()
     storage._foreignNested = foreignNested
@@ -1911,7 +1946,7 @@ public struct Proto3TestForeignNested: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestForeignNested) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestForeignNested) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -1934,8 +1969,8 @@ public struct Proto3TestForeignNested: ProtobufGeneratedMessage {
 }
 
 ///   Test that really large tag numbers don't break anything.
-public struct Proto3TestReallyLargeTagNumber: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestReallyLargeTagNumber"}
+public struct ProtobufUnittest_TestReallyLargeTagNumber: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestReallyLargeTagNumber"}
   public var protoMessageName: String {return "TestReallyLargeTagNumber"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -1992,15 +2027,15 @@ public struct Proto3TestReallyLargeTagNumber: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestReallyLargeTagNumber) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestReallyLargeTagNumber) -> Bool {
     if a != other.a {return false}
     if bb != other.bb {return false}
     return true
   }
 }
 
-public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestRecursiveMessage"}
+public struct ProtobufUnittest_TestRecursiveMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestRecursiveMessage"}
   public var protoMessageName: String {return "TestRecursiveMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2013,8 +2048,8 @@ public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestRecursiveMessage
-    var _a: Proto3TestRecursiveMessage? = nil
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestRecursiveMessage
+    var _a: ProtobufUnittest_TestRecursiveMessage? = nil
     var _i: Int32 = 0
 
     init() {}
@@ -2022,7 +2057,7 @@ public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
     func decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool {
       let handled: Bool
       switch protoFieldNumber {
-      case 1: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestRecursiveMessage.self, value: &_a)
+      case 1: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestRecursiveMessage.self, value: &_a)
       case 2: handled = try setter.decodeSingularField(fieldType: ProtobufInt32.self, value: &_i)
       default:
         handled = false
@@ -2061,8 +2096,8 @@ public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
 
   private var _storage: _StorageClass?
 
-  public var a: Proto3TestRecursiveMessage {
-    get {return _storage?._a ?? Proto3TestRecursiveMessage()}
+  public var a: ProtobufUnittest_TestRecursiveMessage {
+    get {return _storage?._a ?? ProtobufUnittest_TestRecursiveMessage()}
     set {_uniqueStorage()._a = newValue}
   }
 
@@ -2073,7 +2108,7 @@ public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
 
   public init() {}
 
-  public init(a: Proto3TestRecursiveMessage? = nil,
+  public init(a: ProtobufUnittest_TestRecursiveMessage? = nil,
     i: Int32? = nil)
   {
     let storage = _uniqueStorage()
@@ -2093,7 +2128,7 @@ public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestRecursiveMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestRecursiveMessage) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -2116,8 +2151,8 @@ public struct Proto3TestRecursiveMessage: ProtobufGeneratedMessage {
 }
 
 ///   Test that mutual recursion works.
-public struct Proto3TestMutualRecursionA: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestMutualRecursionA"}
+public struct ProtobufUnittest_TestMutualRecursionA: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestMutualRecursionA"}
   public var protoMessageName: String {return "TestMutualRecursionA"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2128,15 +2163,15 @@ public struct Proto3TestMutualRecursionA: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestMutualRecursionA
-    var _bb: Proto3TestMutualRecursionB? = nil
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestMutualRecursionA
+    var _bb: ProtobufUnittest_TestMutualRecursionB? = nil
 
     init() {}
 
     func decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool {
       let handled: Bool
       switch protoFieldNumber {
-      case 1: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestMutualRecursionB.self, value: &_bb)
+      case 1: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestMutualRecursionB.self, value: &_bb)
       default:
         handled = false
       }
@@ -2168,14 +2203,14 @@ public struct Proto3TestMutualRecursionA: ProtobufGeneratedMessage {
 
   private var _storage: _StorageClass?
 
-  public var bb: Proto3TestMutualRecursionB {
-    get {return _storage?._bb ?? Proto3TestMutualRecursionB()}
+  public var bb: ProtobufUnittest_TestMutualRecursionB {
+    get {return _storage?._bb ?? ProtobufUnittest_TestMutualRecursionB()}
     set {_uniqueStorage()._bb = newValue}
   }
 
   public init() {}
 
-  public init(bb: Proto3TestMutualRecursionB? = nil)
+  public init(bb: ProtobufUnittest_TestMutualRecursionB? = nil)
   {
     let storage = _uniqueStorage()
     storage._bb = bb
@@ -2191,7 +2226,7 @@ public struct Proto3TestMutualRecursionA: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestMutualRecursionA) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestMutualRecursionA) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -2213,8 +2248,8 @@ public struct Proto3TestMutualRecursionA: ProtobufGeneratedMessage {
   }
 }
 
-public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestMutualRecursionB"}
+public struct ProtobufUnittest_TestMutualRecursionB: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestMutualRecursionB"}
   public var protoMessageName: String {return "TestMutualRecursionB"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2227,8 +2262,8 @@ public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestMutualRecursionB
-    var _a: Proto3TestMutualRecursionA? = nil
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestMutualRecursionB
+    var _a: ProtobufUnittest_TestMutualRecursionA? = nil
     var _optionalInt32: Int32 = 0
 
     init() {}
@@ -2236,7 +2271,7 @@ public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
     func decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool {
       let handled: Bool
       switch protoFieldNumber {
-      case 1: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestMutualRecursionA.self, value: &_a)
+      case 1: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestMutualRecursionA.self, value: &_a)
       case 2: handled = try setter.decodeSingularField(fieldType: ProtobufInt32.self, value: &_optionalInt32)
       default:
         handled = false
@@ -2275,8 +2310,8 @@ public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
 
   private var _storage: _StorageClass?
 
-  public var a: Proto3TestMutualRecursionA {
-    get {return _storage?._a ?? Proto3TestMutualRecursionA()}
+  public var a: ProtobufUnittest_TestMutualRecursionA {
+    get {return _storage?._a ?? ProtobufUnittest_TestMutualRecursionA()}
     set {_uniqueStorage()._a = newValue}
   }
 
@@ -2287,7 +2322,7 @@ public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
 
   public init() {}
 
-  public init(a: Proto3TestMutualRecursionA? = nil,
+  public init(a: ProtobufUnittest_TestMutualRecursionA? = nil,
     optionalInt32: Int32? = nil)
   {
     let storage = _uniqueStorage()
@@ -2307,7 +2342,7 @@ public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestMutualRecursionB) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestMutualRecursionB) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -2331,8 +2366,8 @@ public struct Proto3TestMutualRecursionB: ProtobufGeneratedMessage {
 
 ///   Test message with CamelCase field names.  This violates Protocol Buffer
 ///   standard style.
-public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestCamelCaseFieldNames"}
+public struct ProtobufUnittest_TestCamelCaseFieldNames: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestCamelCaseFieldNames"}
   public var protoMessageName: String {return "TestCamelCaseFieldNames"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2357,15 +2392,15 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestCamelCaseFieldNames
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestCamelCaseFieldNames
     var _primitiveField: Int32 = 0
     var _stringField: String = ""
-    var _enumField: Proto3ForeignEnum = Proto3ForeignEnum.foreignUnspecified
-    var _messageField: Proto3ForeignMessage? = nil
+    var _enumField: ProtobufUnittest_ForeignEnum = ProtobufUnittest_ForeignEnum.foreignUnspecified
+    var _messageField: ProtobufUnittest_ForeignMessage? = nil
     var _repeatedPrimitiveField: [Int32] = []
     var _repeatedStringField: [String] = []
-    var _repeatedEnumField: [Proto3ForeignEnum] = []
-    var _repeatedMessageField: [Proto3ForeignMessage] = []
+    var _repeatedEnumField: [ProtobufUnittest_ForeignEnum] = []
+    var _repeatedMessageField: [ProtobufUnittest_ForeignMessage] = []
 
     init() {}
 
@@ -2374,12 +2409,12 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
       switch protoFieldNumber {
       case 1: handled = try setter.decodeSingularField(fieldType: ProtobufInt32.self, value: &_primitiveField)
       case 2: handled = try setter.decodeSingularField(fieldType: ProtobufString.self, value: &_stringField)
-      case 3: handled = try setter.decodeSingularField(fieldType: Proto3ForeignEnum.self, value: &_enumField)
-      case 4: handled = try setter.decodeSingularMessageField(fieldType: Proto3ForeignMessage.self, value: &_messageField)
+      case 3: handled = try setter.decodeSingularField(fieldType: ProtobufUnittest_ForeignEnum.self, value: &_enumField)
+      case 4: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_ForeignMessage.self, value: &_messageField)
       case 7: handled = try setter.decodePackedField(fieldType: ProtobufInt32.self, value: &_repeatedPrimitiveField)
       case 8: handled = try setter.decodeRepeatedField(fieldType: ProtobufString.self, value: &_repeatedStringField)
-      case 9: handled = try setter.decodePackedField(fieldType: Proto3ForeignEnum.self, value: &_repeatedEnumField)
-      case 10: handled = try setter.decodeRepeatedMessageField(fieldType: Proto3ForeignMessage.self, value: &_repeatedMessageField)
+      case 9: handled = try setter.decodePackedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: &_repeatedEnumField)
+      case 10: handled = try setter.decodeRepeatedMessageField(fieldType: ProtobufUnittest_ForeignMessage.self, value: &_repeatedMessageField)
       default:
         handled = false
       }
@@ -2393,8 +2428,8 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
       if _stringField != "" {
         try visitor.visitSingularField(fieldType: ProtobufString.self, value: _stringField, protoFieldNumber: 2, protoFieldName: "StringField", jsonFieldName: "stringField", swiftFieldName: "stringField")
       }
-      if _enumField != Proto3ForeignEnum.foreignUnspecified {
-        try visitor.visitSingularField(fieldType: Proto3ForeignEnum.self, value: _enumField, protoFieldNumber: 3, protoFieldName: "EnumField", jsonFieldName: "enumField", swiftFieldName: "enumField")
+      if _enumField != ProtobufUnittest_ForeignEnum.foreignUnspecified {
+        try visitor.visitSingularField(fieldType: ProtobufUnittest_ForeignEnum.self, value: _enumField, protoFieldNumber: 3, protoFieldName: "EnumField", jsonFieldName: "enumField", swiftFieldName: "enumField")
       }
       if let v = _messageField {
         try visitor.visitSingularMessageField(value: v, protoFieldNumber: 4, protoFieldName: "MessageField", jsonFieldName: "messageField", swiftFieldName: "messageField")
@@ -2406,7 +2441,7 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
         try visitor.visitRepeatedField(fieldType: ProtobufString.self, value: _repeatedStringField, protoFieldNumber: 8, protoFieldName: "RepeatedStringField", jsonFieldName: "repeatedStringField", swiftFieldName: "repeatedStringField")
       }
       if !_repeatedEnumField.isEmpty {
-        try visitor.visitPackedField(fieldType: Proto3ForeignEnum.self, value: _repeatedEnumField, protoFieldNumber: 9, protoFieldName: "RepeatedEnumField", jsonFieldName: "repeatedEnumField", swiftFieldName: "repeatedEnumField")
+        try visitor.visitPackedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: _repeatedEnumField, protoFieldNumber: 9, protoFieldName: "RepeatedEnumField", jsonFieldName: "repeatedEnumField", swiftFieldName: "repeatedEnumField")
       }
       if !_repeatedMessageField.isEmpty {
         try visitor.visitRepeatedMessageField(value: _repeatedMessageField, protoFieldNumber: 10, protoFieldName: "RepeatedMessageField", jsonFieldName: "repeatedMessageField", swiftFieldName: "repeatedMessageField")
@@ -2416,7 +2451,7 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
     var isEmpty: Bool {
       if _primitiveField != 0 {return false}
       if _stringField != "" {return false}
-      if _enumField != Proto3ForeignEnum.foreignUnspecified {return false}
+      if _enumField != ProtobufUnittest_ForeignEnum.foreignUnspecified {return false}
       if _messageField != nil {return false}
       if !_repeatedPrimitiveField.isEmpty {return false}
       if !_repeatedStringField.isEmpty {return false}
@@ -2463,13 +2498,13 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
     set {_uniqueStorage()._stringField = newValue}
   }
 
-  public var enumField: Proto3ForeignEnum {
-    get {return _storage?._enumField ?? Proto3ForeignEnum.foreignUnspecified}
+  public var enumField: ProtobufUnittest_ForeignEnum {
+    get {return _storage?._enumField ?? ProtobufUnittest_ForeignEnum.foreignUnspecified}
     set {_uniqueStorage()._enumField = newValue}
   }
 
-  public var messageField: Proto3ForeignMessage {
-    get {return _storage?._messageField ?? Proto3ForeignMessage()}
+  public var messageField: ProtobufUnittest_ForeignMessage {
+    get {return _storage?._messageField ?? ProtobufUnittest_ForeignMessage()}
     set {_uniqueStorage()._messageField = newValue}
   }
 
@@ -2483,12 +2518,12 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
     set {_uniqueStorage()._repeatedStringField = newValue}
   }
 
-  public var repeatedEnumField: [Proto3ForeignEnum] {
+  public var repeatedEnumField: [ProtobufUnittest_ForeignEnum] {
     get {return _storage?._repeatedEnumField ?? []}
     set {_uniqueStorage()._repeatedEnumField = newValue}
   }
 
-  public var repeatedMessageField: [Proto3ForeignMessage] {
+  public var repeatedMessageField: [ProtobufUnittest_ForeignMessage] {
     get {return _storage?._repeatedMessageField ?? []}
     set {_uniqueStorage()._repeatedMessageField = newValue}
   }
@@ -2497,12 +2532,12 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
 
   public init(primitiveField: Int32? = nil,
     stringField: String? = nil,
-    enumField: Proto3ForeignEnum? = nil,
-    messageField: Proto3ForeignMessage? = nil,
+    enumField: ProtobufUnittest_ForeignEnum? = nil,
+    messageField: ProtobufUnittest_ForeignMessage? = nil,
     repeatedPrimitiveField: [Int32] = [],
     repeatedStringField: [String] = [],
-    repeatedEnumField: [Proto3ForeignEnum] = [],
-    repeatedMessageField: [Proto3ForeignMessage] = [])
+    repeatedEnumField: [ProtobufUnittest_ForeignEnum] = [],
+    repeatedMessageField: [ProtobufUnittest_ForeignMessage] = [])
   {
     let storage = _uniqueStorage()
     if let v = primitiveField {
@@ -2539,7 +2574,7 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestCamelCaseFieldNames) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestCamelCaseFieldNames) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -2563,8 +2598,8 @@ public struct Proto3TestCamelCaseFieldNames: ProtobufGeneratedMessage {
 
 ///   We list fields out of order, to ensure that we're using field number and not
 ///   field index to determine serialization order.
-public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestFieldOrderings"}
+public struct ProtobufUnittest_TestFieldOrderings: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestFieldOrderings"}
   public var protoMessageName: String {return "TestFieldOrderings"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2581,11 +2616,11 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestFieldOrderings
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestFieldOrderings
     var _myString: String = ""
     var _myInt: Int64 = 0
     var _myFloat: Float = 0
-    var _singleNestedMessage: Proto3TestFieldOrderings.NestedMessage? = nil
+    var _singleNestedMessage: ProtobufUnittest_TestFieldOrderings.NestedMessage? = nil
 
     init() {}
 
@@ -2595,7 +2630,7 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
       case 11: handled = try setter.decodeSingularField(fieldType: ProtobufString.self, value: &_myString)
       case 1: handled = try setter.decodeSingularField(fieldType: ProtobufInt64.self, value: &_myInt)
       case 101: handled = try setter.decodeSingularField(fieldType: ProtobufFloat.self, value: &_myFloat)
-      case 200: handled = try setter.decodeSingularMessageField(fieldType: Proto3TestFieldOrderings.NestedMessage.self, value: &_singleNestedMessage)
+      case 200: handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestFieldOrderings.NestedMessage.self, value: &_singleNestedMessage)
       default:
         handled = false
       }
@@ -2646,7 +2681,7 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
   private var _storage: _StorageClass?
 
   public struct NestedMessage: ProtobufGeneratedMessage {
-    public var swiftClassName: String {return "Proto3TestFieldOrderings.NestedMessage"}
+    public var swiftClassName: String {return "ProtobufUnittest_TestFieldOrderings.NestedMessage"}
     public var protoMessageName: String {return "NestedMessage"}
     public var protoPackageName: String {return "protobuf_unittest"}
     public var jsonFieldNames: [String: Int] {return [
@@ -2704,7 +2739,7 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
       return true
     }
 
-    public func _protoc_generated_isEqualTo(other: Proto3TestFieldOrderings.NestedMessage) -> Bool {
+    public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestFieldOrderings.NestedMessage) -> Bool {
       if oo != other.oo {return false}
       if bb != other.bb {return false}
       return true
@@ -2726,8 +2761,8 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
     set {_uniqueStorage()._myFloat = newValue}
   }
 
-  public var singleNestedMessage: Proto3TestFieldOrderings.NestedMessage {
-    get {return _storage?._singleNestedMessage ?? Proto3TestFieldOrderings.NestedMessage()}
+  public var singleNestedMessage: ProtobufUnittest_TestFieldOrderings.NestedMessage {
+    get {return _storage?._singleNestedMessage ?? ProtobufUnittest_TestFieldOrderings.NestedMessage()}
     set {_uniqueStorage()._singleNestedMessage = newValue}
   }
 
@@ -2736,7 +2771,7 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
   public init(myString: String? = nil,
     myInt: Int64? = nil,
     myFloat: Float? = nil,
-    singleNestedMessage: Proto3TestFieldOrderings.NestedMessage? = nil)
+    singleNestedMessage: ProtobufUnittest_TestFieldOrderings.NestedMessage? = nil)
   {
     let storage = _uniqueStorage()
     if let v = myString {
@@ -2761,7 +2796,7 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestFieldOrderings) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestFieldOrderings) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -2783,8 +2818,8 @@ public struct Proto3TestFieldOrderings: ProtobufGeneratedMessage {
   }
 }
 
-public struct Proto3SparseEnumMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3SparseEnumMessage"}
+public struct ProtobufUnittest_SparseEnumMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_SparseEnumMessage"}
   public var protoMessageName: String {return "SparseEnumMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2794,11 +2829,11 @@ public struct Proto3SparseEnumMessage: ProtobufGeneratedMessage {
     "sparse_enum": 1,
   ]}
 
-  public var sparseEnum: Proto3TestSparseEnum = Proto3TestSparseEnum.testSparseEnumUnspecified
+  public var sparseEnum: ProtobufUnittest_TestSparseEnum = ProtobufUnittest_TestSparseEnum.testSparseEnumUnspecified
 
   public init() {}
 
-  public init(sparseEnum: Proto3TestSparseEnum? = nil)
+  public init(sparseEnum: ProtobufUnittest_TestSparseEnum? = nil)
   {
     if let v = sparseEnum {
       self.sparseEnum = v
@@ -2808,7 +2843,7 @@ public struct Proto3SparseEnumMessage: ProtobufGeneratedMessage {
   public mutating func _protoc_generated_decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool {
     let handled: Bool
     switch protoFieldNumber {
-    case 1: handled = try setter.decodeSingularField(fieldType: Proto3TestSparseEnum.self, value: &sparseEnum)
+    case 1: handled = try setter.decodeSingularField(fieldType: ProtobufUnittest_TestSparseEnum.self, value: &sparseEnum)
     default:
       handled = false
     }
@@ -2816,25 +2851,25 @@ public struct Proto3SparseEnumMessage: ProtobufGeneratedMessage {
   }
 
   public func _protoc_generated_traverse(visitor: inout ProtobufVisitor) throws {
-    if sparseEnum != Proto3TestSparseEnum.testSparseEnumUnspecified {
-      try visitor.visitSingularField(fieldType: Proto3TestSparseEnum.self, value: sparseEnum, protoFieldNumber: 1, protoFieldName: "sparse_enum", jsonFieldName: "sparseEnum", swiftFieldName: "sparseEnum")
+    if sparseEnum != ProtobufUnittest_TestSparseEnum.testSparseEnumUnspecified {
+      try visitor.visitSingularField(fieldType: ProtobufUnittest_TestSparseEnum.self, value: sparseEnum, protoFieldNumber: 1, protoFieldName: "sparse_enum", jsonFieldName: "sparseEnum", swiftFieldName: "sparseEnum")
     }
   }
 
   public var _protoc_generated_isEmpty: Bool {
-    if sparseEnum != Proto3TestSparseEnum.testSparseEnumUnspecified {return false}
+    if sparseEnum != ProtobufUnittest_TestSparseEnum.testSparseEnumUnspecified {return false}
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3SparseEnumMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_SparseEnumMessage) -> Bool {
     if sparseEnum != other.sparseEnum {return false}
     return true
   }
 }
 
 ///   Test String and Bytes: string is for valid UTF-8 strings
-public struct Proto3OneString: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3OneString"}
+public struct ProtobufUnittest_OneString: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_OneString"}
   public var protoMessageName: String {return "OneString"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2876,14 +2911,14 @@ public struct Proto3OneString: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3OneString) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_OneString) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3MoreString: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3MoreString"}
+public struct ProtobufUnittest_MoreString: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_MoreString"}
   public var protoMessageName: String {return "MoreString"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2925,14 +2960,14 @@ public struct Proto3MoreString: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3MoreString) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_MoreString) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3OneBytes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3OneBytes"}
+public struct ProtobufUnittest_OneBytes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_OneBytes"}
   public var protoMessageName: String {return "OneBytes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -2974,14 +3009,14 @@ public struct Proto3OneBytes: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3OneBytes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_OneBytes) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3MoreBytes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3MoreBytes"}
+public struct ProtobufUnittest_MoreBytes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_MoreBytes"}
   public var protoMessageName: String {return "MoreBytes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3023,15 +3058,15 @@ public struct Proto3MoreBytes: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3MoreBytes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_MoreBytes) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
 ///   Test int32, uint32, int64, uint64, and bool are all compatible
-public struct Proto3Int32Message: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3Int32Message"}
+public struct ProtobufUnittest_Int32Message: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_Int32Message"}
   public var protoMessageName: String {return "Int32Message"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3073,14 +3108,14 @@ public struct Proto3Int32Message: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3Int32Message) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_Int32Message) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3Uint32Message: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3Uint32Message"}
+public struct ProtobufUnittest_Uint32Message: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_Uint32Message"}
   public var protoMessageName: String {return "Uint32Message"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3122,14 +3157,14 @@ public struct Proto3Uint32Message: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3Uint32Message) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_Uint32Message) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3Int64Message: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3Int64Message"}
+public struct ProtobufUnittest_Int64Message: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_Int64Message"}
   public var protoMessageName: String {return "Int64Message"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3171,14 +3206,14 @@ public struct Proto3Int64Message: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3Int64Message) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_Int64Message) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3Uint64Message: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3Uint64Message"}
+public struct ProtobufUnittest_Uint64Message: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_Uint64Message"}
   public var protoMessageName: String {return "Uint64Message"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3220,14 +3255,14 @@ public struct Proto3Uint64Message: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3Uint64Message) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_Uint64Message) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
-public struct Proto3BoolMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3BoolMessage"}
+public struct ProtobufUnittest_BoolMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_BoolMessage"}
   public var protoMessageName: String {return "BoolMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3269,15 +3304,15 @@ public struct Proto3BoolMessage: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3BoolMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_BoolMessage) -> Bool {
     if data != other.data {return false}
     return true
   }
 }
 
 ///   Test oneofs.
-public struct Proto3TestOneof: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestOneof"}
+public struct ProtobufUnittest_TestOneof: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestOneof"}
   public var protoMessageName: String {return "TestOneof"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3292,8 +3327,8 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
   ]}
 
   private class _StorageClass {
-    typealias ProtobufExtendedMessage = Proto3TestOneof
-    var _foo = Proto3TestOneof.OneOf_Foo()
+    typealias ProtobufExtendedMessage = ProtobufUnittest_TestOneof
+    var _foo = ProtobufUnittest_TestOneof.OneOf_Foo()
 
     init() {}
 
@@ -3334,7 +3369,7 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
   public enum OneOf_Foo: ExpressibleByNilLiteral, ProtobufOneofEnum {
     case fooInt(Int32)
     case fooString(String)
-    case fooMessage(Proto3TestAllTypes)
+    case fooMessage(ProtobufUnittest_TestAllTypes)
     case None
 
     public init(nilLiteral: ()) {
@@ -3360,8 +3395,8 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
         handled = try setter.decodeSingularField(fieldType: ProtobufString.self, value: &value)
         self = .fooString(value)
       case 3:
-        var value: Proto3TestAllTypes?
-        handled = try setter.decodeSingularMessageField(fieldType: Proto3TestAllTypes.self, value: &value)
+        var value: ProtobufUnittest_TestAllTypes?
+        handled = try setter.decodeSingularMessageField(fieldType: ProtobufUnittest_TestAllTypes.self, value: &value)
         if let value = value, handled {
           self = .fooMessage(value)
         }
@@ -3430,7 +3465,7 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
     }
   }
 
-  public var fooMessage: Proto3TestAllTypes? {
+  public var fooMessage: ProtobufUnittest_TestAllTypes? {
     get {
       if let storage = _storage {
         if case .fooMessage(let v) = storage._foo {
@@ -3459,7 +3494,7 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
 
   public init(fooInt: Int32? = nil,
     fooString: String? = nil,
-    fooMessage: Proto3TestAllTypes? = nil)
+    fooMessage: ProtobufUnittest_TestAllTypes? = nil)
   {
     let storage = _uniqueStorage()
     if let v = fooInt {
@@ -3483,7 +3518,7 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
 
   public var _protoc_generated_isEmpty: Bool {return _storage?.isEmpty ?? true}
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestOneof) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestOneof) -> Bool {
     if let s = _storage {
       if let os = other._storage {
         return s === os || s.isEqualTo(other: os)
@@ -3505,8 +3540,9 @@ public struct Proto3TestOneof: ProtobufGeneratedMessage {
   }
 }
 
-public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestPackedTypes"}
+//  Test messages for packed fields
+public struct ProtobufUnittest_TestPackedTypes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestPackedTypes"}
   public var protoMessageName: String {return "TestPackedTypes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3568,7 +3604,7 @@ public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
 
   public var packedBool: [Bool] = []
 
-  public var packedEnum: [Proto3ForeignEnum] = []
+  public var packedEnum: [ProtobufUnittest_ForeignEnum] = []
 
   public init() {}
 
@@ -3585,7 +3621,7 @@ public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
     packedFloat: [Float] = [],
     packedDouble: [Double] = [],
     packedBool: [Bool] = [],
-    packedEnum: [Proto3ForeignEnum] = [])
+    packedEnum: [ProtobufUnittest_ForeignEnum] = [])
   {
     if !packedInt32.isEmpty {
       self.packedInt32 = packedInt32
@@ -3647,7 +3683,7 @@ public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
     case 100: handled = try setter.decodePackedField(fieldType: ProtobufFloat.self, value: &packedFloat)
     case 101: handled = try setter.decodePackedField(fieldType: ProtobufDouble.self, value: &packedDouble)
     case 102: handled = try setter.decodePackedField(fieldType: ProtobufBool.self, value: &packedBool)
-    case 103: handled = try setter.decodePackedField(fieldType: Proto3ForeignEnum.self, value: &packedEnum)
+    case 103: handled = try setter.decodePackedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: &packedEnum)
     default:
       handled = false
     }
@@ -3695,7 +3731,7 @@ public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
       try visitor.visitPackedField(fieldType: ProtobufBool.self, value: packedBool, protoFieldNumber: 102, protoFieldName: "packed_bool", jsonFieldName: "packedBool", swiftFieldName: "packedBool")
     }
     if !packedEnum.isEmpty {
-      try visitor.visitPackedField(fieldType: Proto3ForeignEnum.self, value: packedEnum, protoFieldNumber: 103, protoFieldName: "packed_enum", jsonFieldName: "packedEnum", swiftFieldName: "packedEnum")
+      try visitor.visitPackedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: packedEnum, protoFieldNumber: 103, protoFieldName: "packed_enum", jsonFieldName: "packedEnum", swiftFieldName: "packedEnum")
     }
   }
 
@@ -3717,7 +3753,7 @@ public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestPackedTypes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestPackedTypes) -> Bool {
     if packedInt32 != other.packedInt32 {return false}
     if packedInt64 != other.packedInt64 {return false}
     if packedUint32 != other.packedUint32 {return false}
@@ -3738,8 +3774,8 @@ public struct Proto3TestPackedTypes: ProtobufGeneratedMessage {
 
 ///   A message with the same fields as TestPackedTypes, but without packing. Used
 ///   to test packed <-> unpacked wire compatibility.
-public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestUnpackedTypes"}
+public struct ProtobufUnittest_TestUnpackedTypes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestUnpackedTypes"}
   public var protoMessageName: String {return "TestUnpackedTypes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -3801,7 +3837,7 @@ public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
 
   public var unpackedBool: [Bool] = []
 
-  public var unpackedEnum: [Proto3ForeignEnum] = []
+  public var unpackedEnum: [ProtobufUnittest_ForeignEnum] = []
 
   public init() {}
 
@@ -3818,7 +3854,7 @@ public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
     unpackedFloat: [Float] = [],
     unpackedDouble: [Double] = [],
     unpackedBool: [Bool] = [],
-    unpackedEnum: [Proto3ForeignEnum] = [])
+    unpackedEnum: [ProtobufUnittest_ForeignEnum] = [])
   {
     if !unpackedInt32.isEmpty {
       self.unpackedInt32 = unpackedInt32
@@ -3880,7 +3916,7 @@ public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
     case 100: handled = try setter.decodeRepeatedField(fieldType: ProtobufFloat.self, value: &unpackedFloat)
     case 101: handled = try setter.decodeRepeatedField(fieldType: ProtobufDouble.self, value: &unpackedDouble)
     case 102: handled = try setter.decodeRepeatedField(fieldType: ProtobufBool.self, value: &unpackedBool)
-    case 103: handled = try setter.decodeRepeatedField(fieldType: Proto3ForeignEnum.self, value: &unpackedEnum)
+    case 103: handled = try setter.decodeRepeatedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: &unpackedEnum)
     default:
       handled = false
     }
@@ -3928,7 +3964,7 @@ public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
       try visitor.visitRepeatedField(fieldType: ProtobufBool.self, value: unpackedBool, protoFieldNumber: 102, protoFieldName: "unpacked_bool", jsonFieldName: "unpackedBool", swiftFieldName: "unpackedBool")
     }
     if !unpackedEnum.isEmpty {
-      try visitor.visitRepeatedField(fieldType: Proto3ForeignEnum.self, value: unpackedEnum, protoFieldNumber: 103, protoFieldName: "unpacked_enum", jsonFieldName: "unpackedEnum", swiftFieldName: "unpackedEnum")
+      try visitor.visitRepeatedField(fieldType: ProtobufUnittest_ForeignEnum.self, value: unpackedEnum, protoFieldNumber: 103, protoFieldName: "unpacked_enum", jsonFieldName: "unpackedEnum", swiftFieldName: "unpackedEnum")
     }
   }
 
@@ -3950,7 +3986,7 @@ public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestUnpackedTypes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestUnpackedTypes) -> Bool {
     if unpackedInt32 != other.unpackedInt32 {return false}
     if unpackedInt64 != other.unpackedInt64 {return false}
     if unpackedUint32 != other.unpackedUint32 {return false}
@@ -3969,8 +4005,8 @@ public struct Proto3TestUnpackedTypes: ProtobufGeneratedMessage {
   }
 }
 
-public struct Proto3TestRepeatedScalarDifferentTagSizes: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestRepeatedScalarDifferentTagSizes"}
+public struct ProtobufUnittest_TestRepeatedScalarDifferentTagSizes: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestRepeatedScalarDifferentTagSizes"}
   public var protoMessageName: String {return "TestRepeatedScalarDifferentTagSizes"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -4083,7 +4119,7 @@ public struct Proto3TestRepeatedScalarDifferentTagSizes: ProtobufGeneratedMessag
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestRepeatedScalarDifferentTagSizes) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestRepeatedScalarDifferentTagSizes) -> Bool {
     if repeatedFixed32 != other.repeatedFixed32 {return false}
     if repeatedInt32 != other.repeatedInt32 {return false}
     if repeatedFixed64 != other.repeatedFixed64 {return false}
@@ -4094,8 +4130,8 @@ public struct Proto3TestRepeatedScalarDifferentTagSizes: ProtobufGeneratedMessag
   }
 }
 
-public struct Proto3TestCommentInjectionMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3TestCommentInjectionMessage"}
+public struct ProtobufUnittest_TestCommentInjectionMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_TestCommentInjectionMessage"}
   public var protoMessageName: String {return "TestCommentInjectionMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [
@@ -4138,15 +4174,15 @@ public struct Proto3TestCommentInjectionMessage: ProtobufGeneratedMessage {
     return true
   }
 
-  public func _protoc_generated_isEqualTo(other: Proto3TestCommentInjectionMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_TestCommentInjectionMessage) -> Bool {
     if a != other.a {return false}
     return true
   }
 }
 
 ///   Test that RPC services work.
-public struct Proto3FooRequest: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3FooRequest"}
+public struct ProtobufUnittest_FooRequest: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_FooRequest"}
   public var protoMessageName: String {return "FooRequest"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -4163,13 +4199,13 @@ public struct Proto3FooRequest: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3FooRequest) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_FooRequest) -> Bool {
     return true
   }
 }
 
-public struct Proto3FooResponse: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3FooResponse"}
+public struct ProtobufUnittest_FooResponse: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_FooResponse"}
   public var protoMessageName: String {return "FooResponse"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -4186,13 +4222,13 @@ public struct Proto3FooResponse: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3FooResponse) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_FooResponse) -> Bool {
     return true
   }
 }
 
-public struct Proto3FooClientMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3FooClientMessage"}
+public struct ProtobufUnittest_FooClientMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_FooClientMessage"}
   public var protoMessageName: String {return "FooClientMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -4209,13 +4245,13 @@ public struct Proto3FooClientMessage: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3FooClientMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_FooClientMessage) -> Bool {
     return true
   }
 }
 
-public struct Proto3FooServerMessage: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3FooServerMessage"}
+public struct ProtobufUnittest_FooServerMessage: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_FooServerMessage"}
   public var protoMessageName: String {return "FooServerMessage"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -4232,13 +4268,13 @@ public struct Proto3FooServerMessage: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3FooServerMessage) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_FooServerMessage) -> Bool {
     return true
   }
 }
 
-public struct Proto3BarRequest: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3BarRequest"}
+public struct ProtobufUnittest_BarRequest: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_BarRequest"}
   public var protoMessageName: String {return "BarRequest"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -4255,13 +4291,13 @@ public struct Proto3BarRequest: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3BarRequest) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_BarRequest) -> Bool {
     return true
   }
 }
 
-public struct Proto3BarResponse: ProtobufGeneratedMessage {
-  public var swiftClassName: String {return "Proto3BarResponse"}
+public struct ProtobufUnittest_BarResponse: ProtobufGeneratedMessage {
+  public var swiftClassName: String {return "ProtobufUnittest_BarResponse"}
   public var protoMessageName: String {return "BarResponse"}
   public var protoPackageName: String {return "protobuf_unittest"}
   public var jsonFieldNames: [String: Int] {return [:]}
@@ -4278,12 +4314,12 @@ public struct Proto3BarResponse: ProtobufGeneratedMessage {
 
   public let _protoc_generated_isEmpty: Bool = true
 
-  public func _protoc_generated_isEqualTo(other: Proto3BarResponse) -> Bool {
+  public func _protoc_generated_isEqualTo(other: ProtobufUnittest_BarResponse) -> Bool {
     return true
   }
 }
 
-public func ==(lhs: Proto3TestAllTypes.OneOf_OneofField, rhs: Proto3TestAllTypes.OneOf_OneofField) -> Bool {
+public func ==(lhs: ProtobufUnittest_TestAllTypes.OneOf_OneofField, rhs: ProtobufUnittest_TestAllTypes.OneOf_OneofField) -> Bool {
   switch (lhs, rhs) {
   case (.oneofUint32(let l), .oneofUint32(let r)): return l == r
   case (.oneofNestedMessage(let l), .oneofNestedMessage(let r)): return l == r
@@ -4294,7 +4330,7 @@ public func ==(lhs: Proto3TestAllTypes.OneOf_OneofField, rhs: Proto3TestAllTypes
   }
 }
 
-public func ==(lhs: Proto3TestOneof.OneOf_Foo, rhs: Proto3TestOneof.OneOf_Foo) -> Bool {
+public func ==(lhs: ProtobufUnittest_TestOneof.OneOf_Foo, rhs: ProtobufUnittest_TestOneof.OneOf_Foo) -> Bool {
   switch (lhs, rhs) {
   case (.fooInt(let l), .fooInt(let r)): return l == r
   case (.fooString(let l), .fooString(let r)): return l == r
