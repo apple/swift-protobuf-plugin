@@ -100,7 +100,7 @@ This will create a file `DataModel.pb.swift` with a `struct BookInfo` and a `str
 * Full mutable Swift copy-on-write value semantics
 * CustomDebugStringConvertible:  The generated struct has a debugDescription method that can dump a full representation of the data
 * Hashable, Equatable:  The generated struct can be put into a `Set<>` or `Dictionary<>`
-* Binary serializable:  The `.serializeProtobuf()` method returns a `[UInt8]` with a compact binary form of your data.  You can deserialize the data using the `init(protobuf:)` initializer.
+* Binary serializable:  The `.serializeProtobuf()` method returns a `Data` with a compact binary form of your data.  You can deserialize the data using the `init(protobuf:)` initializer.
 * JSON serializable:  The `.serializeJSON()` method returns a flexible JSON representation of your data that can be parsed with the `init(json:)` initializer.
 * Portable:  The binary and JSON formats used by the serializers here are identical to those supported by protobuf for many other platforms and languages, making it easy to talk to C++ or Java servers, share data with desktop apps written in Objective-C or C++, or work with system applications developed in Python or Go.
 
@@ -145,10 +145,10 @@ which you can use as follows:
 
 **Groups:** Each group within a message generates a nested struct.  The group struct implements the `ProtobufGroupType` protocol which differs from `ProtobufMessageType` primarily in how it handles serialization and deserialization (you do not normally need to be aware of this).  Note that groups are deprecated and only available with the older 'proto2' language dialect.
 
-**Binary Serialization and Deserialization:**  You can serialize to a `[UInt8]` using the `serializeProtobuf()` method or deserialize with the corresponding initializer:
+**Binary Serialization and Deserialization:**  You can serialize to a `Data` using the `serializeProtobuf()` method or deserialize with the corresponding initializer:
 ```
-init(protobuf: [UInt8]) throws
-func serializeProtobuf() throws -> [UInt8]
+init(protobuf: Data) throws
+func serializeProtobuf() throws -> Data
 ```
 Protobuf binary serialization can currently only fail if the data includes Any fields that were decoded from JSON format.  See below for details.
 
