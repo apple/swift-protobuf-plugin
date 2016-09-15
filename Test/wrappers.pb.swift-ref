@@ -40,6 +40,7 @@
 //  where we need to distinguish between the absence of a primitive
 //  typed field and its default value.
 
+import Foundation
 import Protobuf
 
 
@@ -482,11 +483,11 @@ public struct Google_Protobuf_BytesValue: ProtobufGeneratedMessage {
   ]}
 
   ///   The bytes value.
-  public var value: [UInt8] = []
+  public var value: Data = Data()
 
   public init() {}
 
-  public init(value: [UInt8]? = nil)
+  public init(value: Data? = nil)
   {
     if let v = value {
       self.value = v
@@ -504,13 +505,13 @@ public struct Google_Protobuf_BytesValue: ProtobufGeneratedMessage {
   }
 
   public func _protoc_generated_traverse(visitor: inout ProtobufVisitor) throws {
-    if value != [] {
+    if value != Data() {
       try visitor.visitSingularField(fieldType: ProtobufBytes.self, value: value, protoFieldNumber: 1, protoFieldName: "value", jsonFieldName: "value", swiftFieldName: "value")
     }
   }
 
   public var _protoc_generated_isEmpty: Bool {
-    if value != [] {return false}
+    if value != Data() {return false}
     return true
   }
 

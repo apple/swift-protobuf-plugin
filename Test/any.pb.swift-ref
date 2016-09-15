@@ -36,6 +36,7 @@
 //  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import Foundation
 import Protobuf
 
 
@@ -145,12 +146,12 @@ public struct Google_Protobuf_Any: ProtobufGeneratedMessage {
   public var typeURL: String = ""
 
   ///   Must be a valid serialized protocol buffer of the above specified type.
-  public var value: [UInt8] = []
+  public var value: Data = Data()
 
   public init() {}
 
   public init(typeURL: String? = nil,
-    value: [UInt8]? = nil)
+    value: Data? = nil)
   {
     if let v = typeURL {
       self.typeURL = v
@@ -175,14 +176,14 @@ public struct Google_Protobuf_Any: ProtobufGeneratedMessage {
     if typeURL != "" {
       try visitor.visitSingularField(fieldType: ProtobufString.self, value: typeURL, protoFieldNumber: 1, protoFieldName: "type_url", jsonFieldName: "typeUrl", swiftFieldName: "typeURL")
     }
-    if value != [] {
+    if value != Data() {
       try visitor.visitSingularField(fieldType: ProtobufBytes.self, value: value, protoFieldNumber: 2, protoFieldName: "value", jsonFieldName: "value", swiftFieldName: "value")
     }
   }
 
   public var _protoc_generated_isEmpty: Bool {
     if typeURL != "" {return false}
-    if value != [] {return false}
+    if value != Data() {return false}
     return true
   }
 

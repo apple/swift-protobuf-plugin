@@ -195,8 +195,8 @@ func trimWhitespace(_ s: String) -> String {
 /// The protoc parser emits byte literals using an escaped C convention.
 /// Fortunately, it uses only a limited subset of the C escapse:
 ///  \n\r\t\\\'\" and three-digit octal escapes but nothing else.
-func escapedToByteLiteral(_ s: String) -> String {
-     var out = "["
+func escapedToDataLiteral(_ s: String) -> String {
+     var out = "Data(bytes: ["
      var separator = ""
      var escape = false
      var octal = 0
@@ -243,7 +243,7 @@ func escapedToByteLiteral(_ s: String) -> String {
              separator = ", "
          }
      }
-     out += "]"
+     out += "])"
      return out
 }
 

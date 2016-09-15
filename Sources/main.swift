@@ -89,7 +89,7 @@ if justVersion {
     for f in filesToRead {
         let rawRequest = try readFileData(filename: f)
         Stderr.print("Read request: \(rawRequest.count) bytes from \(f)")
-        let request = try CodeGeneratorRequest(protobuf: rawRequest)
+        let request = try CodeGeneratorRequest(protobuf: Data(bytes: rawRequest))
         let context = try Context(request: request)
         let response = context.generateResponse()
         print(response.file[0].content ?? "<No content>")

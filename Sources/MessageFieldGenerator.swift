@@ -53,7 +53,7 @@ extension Google_Protobuf_FieldDescriptorProto {
         case .string: return "String"
         case .group: return context.getMessageNameForPath(path: typeName!)!
         case .message: return context.getMessageNameForPath(path: typeName!)!
-        case .bytes: return "[UInt8]"
+        case .bytes: return "Data"
         case .uint32: return "UInt32"
         case .enum: return context.getEnumNameForPath(path: typeName!)!
         case .sfixed32: return "Int32"
@@ -128,7 +128,7 @@ extension Google_Protobuf_FieldDescriptorProto {
         switch type! {
         case .bool: return "false"
         case .string: return "\"\""
-        case .bytes: return "[]"
+        case .bytes: return "Data()"
         case .group, .message:
             if isRequired || isProto3 {
                 return context.getMessageNameForPath(path: typeName!)! + "()"
@@ -197,7 +197,7 @@ extension Google_Protobuf_FieldDescriptorProto {
            }
         case .bool: return valueText
         case .string: return stringToEscapedStringLiteral(valueText)
-        case .bytes: return escapedToByteLiteral(valueText)
+        case .bytes: return escapedToDataLiteral(valueText)
         case .enum:
             return context.getSwiftNameForEnumCase(path: typeName!, caseName: valueText)
         default: return valueText

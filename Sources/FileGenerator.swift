@@ -257,6 +257,7 @@ class FileGenerator {
         }
 
         p.print(
+            "import Foundation\n",
             "import Protobuf\n",
             "\n")
 

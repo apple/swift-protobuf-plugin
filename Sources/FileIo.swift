@@ -69,15 +69,15 @@ class _Stderr {
 
 class Stdout {
     static func print(_ s: String) { printToFd(s, fd: 1) }
-    static func write(bytes: [UInt8]) {
-        bytes.withUnsafeBufferPointer { (bp: UnsafeBufferPointer<UInt8>) -> () in
-            _ = _write(1, bp.baseAddress, bp.count)
+    static func write(bytes: Data) {
+        bytes.withUnsafeBytes { (p: UnsafePointer<UInt8>) -> () in
+            _ = _write(1, p, bytes.count)
         }
     }
 }
 
 class Stdin {
-    static func readall() throws -> [UInt8] {
+    static func readall() throws -> Data {
         let fd: Int32 = 0
         let buffSize = 32
         var buff = [UInt8]()
@@ -88,7 +88,8 @@ class Stdin {
                 throw MyError.failure
             }
             if count < buffSize {
-                return buff + fragment[0..<count]
+                buff += fragment[0..<count]
+                return Data(bytes: buff)
             }
             buff += fragment
         }
