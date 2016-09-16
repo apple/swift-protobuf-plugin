@@ -8,6 +8,8 @@ Apart from the actual properties themselves, most of this is not explicit in the
 
 Messages in the input proto file generate Swift structs in the result.  These structs conform to `ProtobufMessage` and provide Swift properties for every field, basic information about the message, standard initializers, and serialization and deserialization methods.
 
+Here is a simple proto3 input file to motivate the example below:
+
 ```
 syntax = "proto3";
 message Example {
@@ -18,6 +20,8 @@ message Example {
    repeated string field2 = 2;
 }
 ```
+
+Here is the API for the struct generated from the above.  Note that this includes a lot of methods that come from various protocols and omits some parts of the generated code that are intended purely for internal use by the library:
 
 ```
 public struct Example: ProtobufMessage {
@@ -90,7 +94,7 @@ The following methods can be defined in manually-constructed extensions if you w
    public var isEmpty: Bool
 
    // These are heavily used by the protobuf libraries but are rarely
-   // used in normal code.
+   // used directly in normal code.
    public func isEqualTo(other: Example) -> Bool
    public mutating func decodeField(setter: inout ProtobufFieldDecoder, protoFieldNumber: Int) throws -> Bool
    public func traverse(visitor: inout ProtobufVisitor) throws
@@ -101,7 +105,7 @@ in the `ProtobufGeneratedMessage` protocol.  The generated code
 provides standard implementations of the core capabilities under
 different names; you can use these when overriding the above
 methods, but we strongly advise you not to call these directly
-from your own code:
+from your own code except in such overrides:
 
 ```
 public extension Example: ProtobufGeneratedMessage {
@@ -125,7 +129,12 @@ public enum MyEnum: ProtobufEnum {
     public typealias RawValue = Int
 
     // Case for each value
-    // case UNRECOGNIZED(Int) for proto3 enums
+    // Names are translated to a lowerCamelCase convention from
+    // the UPPER_CASE convention in the proto file:
+    case default
+    case other
+    case andMore
+    case UNRECOGNIZED(Int) // Only in proto3 enums
 
     // Initializer selects the default value (see proto2 and proto3
     // language guides for details.
