@@ -251,6 +251,7 @@ Here is the `decodeField` method for the example just above:
 Similar to the traversal system, the `decodeField` method is given an object that conforms to the `ProtobufFieldDecoder` protocol.
 This object generally encapsulates whatever information the deserializer can determine without actual schema knowledge.
 This method then provides the field decoder with a reference to the appropriate stored property and additional type information (via the same type objects used in the traversal method).
+The decoder now has everything it needs to update the field accordingly.
 
 You may notice that the `decodeField()` method here only uses the proto field number:
 Recall from earlier that the struct provides properties that can be used to map JSON and proto field names to proto field numbers.
