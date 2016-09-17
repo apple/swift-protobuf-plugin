@@ -371,6 +371,14 @@ struct MessageFieldGenerator {
             p.print("}\n")
             p.outdent()
             p.print("}\n")
+        } else if let defaultClause = swiftProto2DefaultValue {
+            p.print("private var \(swiftStorageName): \(swiftStorageType) = \(swiftStorageDefaultValue)\n")
+            p.print("public var \(swiftName): \(swiftApiType) {\n")
+            p.indent()
+            p.print("get {return \(swiftStorageName) ?? \(defaultClause)}\n")
+            p.print("set {\(swiftStorageName) = newValue}\n")
+            p.outdent()
+            p.print("}\n")
         } else {
             p.print("public var \(swiftName): \(swiftStorageType) = \(swiftStorageDefaultValue)\n")
         }
