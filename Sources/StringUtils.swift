@@ -115,6 +115,26 @@ private func lowercaseFirst(_ s: String) -> String {
     }
 }
 
+/// Only allow ASCII alphanumerics and underscore.
+private func basicSanitize(_ s: String) -> String {
+    var out = ""
+    for c in s.characters {
+        switch c {
+        case "A"..."Z": // A-Z
+            out.append(c)
+        case "a"..."z": // a-z
+            out.append(c)
+        case "0"..."9": // 0-9
+            out.append(c)
+        case "_":
+            out.append(c)
+        default:
+            break
+        }
+    }
+    return out
+}
+
 func periodsToUnderscores(_ s: String) -> String {
     var out = ""
     for c in s.characters {
@@ -136,7 +156,7 @@ func toUpperCamelCase(_ s: String) -> String {
         if upperInitials.contains(word) {
             out.append(word.uppercased())
         } else {
-            out.append(uppercaseFirst(word))
+            out.append(uppercaseFirst(basicSanitize(word)))
         }
     }
     return out
