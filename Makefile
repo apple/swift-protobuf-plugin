@@ -27,6 +27,36 @@
 #   WARNING:  You must MANUALLY verify the updated files before committing them
 #
 
+#
+# How to build and test this project:
+#
+# 0. Install protoc (recent 3.0.0 or later)
+# 1. Build the project
+#    $ make
+# 2. Check that the generated output is unchanged
+#    $ make test
+# 3. If no changes, install
+#    $ make install BINDIR=/usr/local/bin
+#
+# If the generated output has changed,
+#
+# 1. Update the reference files
+#    $ make reference
+# 2. MANUALLY verify that the changes are correct
+#    $ git diff Test/reference
+# 3. Commit the changed reference files
+#    $ git commit Test/reference
+#
+# If protobuf project has changed descriptor.proto or plugin.proto,
+#
+# 1. Get the new proto files
+#    $ make update PROTOBUF_PROJECT_DIR=../protobuf
+# 2. Regenerate the protos used by protoc-gen-swift
+#    $ make regenerate
+# 3. Rebuild and test as above
+#
+#
+
 # How to run a 'swift' executable that supports the 'swift build' command.
 SWIFT=swift
 
@@ -64,6 +94,7 @@ SOURCES= \
 	Sources/swift-options.pb.swift
 
 # Protos from Google's source that are used for testing purposes
+# All are in Protos/google/protobuf
 GOOGLE_PROTOS= \
 	any \
 	any_test \
@@ -111,6 +142,11 @@ GOOGLE_PROTOS= \
 	unittest_well_known_types \
 	wrappers
 
+# Extra test Protos used to validate various features
+# All are in Protos/test
+TEST_PROTOS= \
+	option_apple_swift_prefix
+
 .PHONY: default all build check clean install test update update-ref
 
 default: build
@@ -152,6 +188,10 @@ test: build
 	for t in ${GOOGLE_PROTOS}; do \
 		${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-swift --swift_out=Test/_generated -I Protos Protos/google/protobuf/$$t.proto; \
 		diff -bBu Test/reference/$$t.pb.swift Test/_generated/$$t.pb.swift | head -n 50; \
+	done; \
+	for t in ${TEST_PROTOS}; do \
+		${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-swift --swift_out=Test/_generated -I Protos Protos/test/$$t.proto; \
+		diff -bBu Test/reference/$$t.pb.swift Test/_generated/$$t.pb.swift | head -n 50; \
 	done
 
 #
@@ -165,9 +205,7 @@ regenerate:
 	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto Protos/swift-options.proto
 
 #
-# Updates the various captured *.proto.request files by
-# running protoc with a special 'protoc-gen-capture' backend
-# that just captures the input proto.
+# Updates the local copy of Google test protos
 #
 # Note: It is not necessary to do this regularly.  If you do,
 # you should also `make update-ref` to update the corresponding
@@ -178,7 +216,7 @@ update:
 	cp $${ABS_PBDIR}/src/google/protobuf/compiler/plugin.proto Protos/google/protobuf/compiler
 
 #
-# Rebuild all of the *.pb.swift-ref reference files by
+# Rebuild all of the *.pb.swift reference files by
 # running the current version of protoc-gen-swift against
 # the captured request protos
 #
@@ -190,4 +228,7 @@ reference:
 	ABS_TOPDIR=`pwd`; \
 	for t in ${GOOGLE_PROTOS}; do \
 		${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-swift --swift_out=Test/reference -I Protos Protos/google/protobuf/$$t.proto; \
+	done; \
+	for t in ${TEST_PROTOS}; do \
+		${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-swift --swift_out=Test/reference -I Protos Protos/test/$$t.proto; \
 	done

@@ -79,7 +79,7 @@ if justVersion {
 } else if filesToRead.isEmpty {
     let rawRequest = try Stdin.readall()
     Stderr.print("Read request: \(rawRequest.count) bytes")
-    let request = try CodeGeneratorRequest(protobuf: rawRequest)
+    let request = try CodeGeneratorRequest(protobuf: rawRequest, extensions: SwiftOptions_Extensions)
     let context = try Context(request: request)
     let response = context.generateResponse()
     let serializedResponse = try response.serializeProtobuf()
@@ -89,7 +89,7 @@ if justVersion {
     for f in filesToRead {
         let rawRequest = try readFileData(filename: f)
         Stderr.print("Read request: \(rawRequest.count) bytes from \(f)")
-        let request = try CodeGeneratorRequest(protobuf: Data(bytes: rawRequest))
+        let request = try CodeGeneratorRequest(protobuf: Data(bytes: rawRequest), extensions: SwiftOptions_Extensions)
         let context = try Context(request: request)
         let response = context.generateResponse()
         print(response.file[0].content ?? "<No content>")
