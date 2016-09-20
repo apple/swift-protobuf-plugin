@@ -52,7 +52,7 @@ extension Google_Protobuf_EnumValueDescriptorProto {
 /// logic.
 ///
 extension Google_Protobuf_EnumDescriptorProto {
-    var usesPrefixConvention: Bool {
+    var stripPrefixLength: Int {
         let enumName = toUpperCamelCase(name!).uppercased()
         for f in value {
             let fieldName = toUpperCamelCase(f.name!).uppercased()
@@ -60,24 +60,24 @@ extension Google_Protobuf_EnumDescriptorProto {
             let enumChars = [Character](enumName.characters)
             let fieldChars = [Character](fieldName.characters)
             if fieldChars.count <= enumChars.count {
-                return false
+                return 0
             }
             let fieldPrefix = fieldChars[0..<enumChars.count]
             let fieldPrefixString = String(fieldPrefix)
             if fieldPrefixString != enumName {
-                return false
+                return o
             }
 #else
             if enumName.commonPrefix(with: fieldName) != enumName {
-                return false
+                return 0
             }
 #endif
         }
-        return true
+        return enumName.characters.count
     }
 
     func getSwiftNameForEnumCase(caseName: String) -> String {
-        let stripLength = usesPrefixConvention ? name!.characters.count : 0
+        let stripLength = stripPrefixLength
         for f in value {
             if f.name! == caseName {
                 return f.getSwiftName(stripLength: stripLength)
@@ -141,13 +141,7 @@ class EnumGenerator {
             swiftFullName = parentSwiftName! + "." + swiftRelativeName
         }
 
-        let stripLength: Int
-        if descriptor.usesPrefixConvention {
-            stripLength = descriptor.name!.characters.count
-        } else {
-            stripLength = 0
-        }
-
+        let stripLength: Int = descriptor.stripPrefixLength
         var i: Int32 = 0
         var enumCases = [EnumCaseGenerator]()
         for v in descriptor.value {
