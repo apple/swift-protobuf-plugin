@@ -30,6 +30,7 @@ SOURCES= \
 	Sources/ReservedWords.swift \
 	Sources/StringUtils.swift \
 	Sources/Version.swift \
+	Sources/descriptor.pb.swift \
 	Sources/main.swift \
 	Sources/plugin.pb.swift
 
@@ -117,20 +118,22 @@ clean:
 #  * Run the test suite included in SwiftProtobufRuntime to verify that
 #    the functionality is still correct.
 test: build
-	mkdir -p Test/_generated
+	rm -rf Test/_generated && mkdir -p Test/_generated
+	ABS_TOPDIR=`pwd`; \
 	for t in ${GOOGLE_PROTOS}; do \
-		$(PROTOC_GEN_SWIFT) Test/$$t.proto.request > Test/_generated/$$t.pb.swift ; \
-		diff -bBu Test/$$t.pb.swift-ref Test/_generated/$$t.pb.swift | head -n 50; \
+		${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-swift --swift_out=Test/_generated -I Protos Protos/google/protobuf/$$t.proto; \
+		diff -bBu Test/reference/$$t.pb.swift Test/_generated/$$t.pb.swift | head -n 50; \
 	done
 
 #
 # Regenerates plugin.pb.swift and descriptor.pb.swift from protobuf sources.
 # This defines the communications between protoc and the plugin.
 #
+# This could be a prerequisite for 'build' except that it requires
+# the plugin to already be built and also requires protoc to be installed.
+#
 regenerate:
-	ABS_PBDIR=`cd ${PROTOBUF_PROJECT_DIR}; pwd`; \
-	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I $${ABS_PBDIR}/src $${ABS_PBDIR}/src/google/protobuf/compiler/plugin.proto; \
-	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I $${ABS_PBDIR}/src $${ABS_PBDIR}/src/google/protobuf/descriptor.proto;
+	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto
 
 #
 # Updates the various captured *.proto.request files by
@@ -141,26 +144,21 @@ regenerate:
 # you should also `make update-ref` to update the corresponding
 # *.pb.swift-ref files to reflect any changes in the original protos.
 update:
-	for t in ${GOOGLE_PROTOS}; do \
-		( \
-			ABS_TOPDIR=`pwd`; \
-			ABS_PBDIR=`cd ${PROTOBUF_PROJECT_DIR}; pwd`; \
-			cd Test; \
-			${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-capture --capture_out=. -I $${ABS_PBDIR}/src $${ABS_PBDIR}/src/google/protobuf/$$t.proto; \
-			mv capture.proto.request $$t.proto.request; \
-		); \
-	done
+	ABS_PBDIR=`cd ${PROTOBUF_PROJECT_DIR}; pwd`; \
+	for t in ${GOOGLE_PROTOS}; do cp $${ABS_PBDIR}/src/google/protobuf/$$t.proto Protos/google/protobuf; done; \
+	cp $${ABS_PBDIR}/src/google/protobuf/compiler/plugin.proto Protos/google/protobuf/compiler
 
 #
-# Rebuild all of the *.pb.swift-ref files by running
-# the current version of protoc-gen-swift against
+# Rebuild all of the *.pb.swift-ref reference files by
+# running the current version of protoc-gen-swift against
 # the captured request protos
 #
 # If you do this, you MUST MANUALLY verify these files
 # before checking them in, since the new checkin will
 # become the new master reference.
 #
-update-ref:
+reference:
+	ABS_TOPDIR=`pwd`; \
 	for t in ${GOOGLE_PROTOS}; do \
-		$(PROTOC_GEN_SWIFT) Test/$$t.proto.request > Test/$$t.pb.swift-ref ; \
+		${PROTOC} --plugin=$${ABS_TOPDIR}/protoc-gen-swift --swift_out=Test/reference -I Protos Protos/google/protobuf/$$t.proto; \
 	done
