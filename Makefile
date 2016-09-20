@@ -1,3 +1,31 @@
+#
+# Key targets in this Makefile:
+#
+# Note:
+# * The `all` and `install` targets require `swift` command-line tools
+#   be installed, but nothing else.
+# * Other targets require protoc be already installed, `update` requires
+#   a source checkout of Google's protobuf project.
+#
+# make all
+#   Build protoc-gen-swift from current sources
+# make install BINDIR=/usr/local/bin
+#   Copy protoc-gen-swift to BINDIR
+# make regenerate
+#   Rebuild Swift source used by protoc-gen-swift from proto files
+#   (requires protoc-gen-swift be already compiled and protoc is in the $PATH)
+# make update PROTOBUF_PROJECT_DIR=../protobuf
+#   Copy useful proto files from Google's protobuf project
+#   (requires a source checkout of Google's protobuf project)
+#   (only needed if Google's descriptor or plugin protos have changed)
+# make test
+#   Check generated Swift by comparing output to stored reference files
+#   (Requires protoc-gen-swift be already compiled and protoc is in $PATH)
+# make reference
+#   Replace reference files
+#   (Requires protoc-gen-swift be already compiled and protoc is in $PATH)
+#   WARNING:  You must MANUALLY verify the updated files before committing them
+#
 
 # How to run a 'swift' executable that supports the 'swift build' command.
 SWIFT=swift
