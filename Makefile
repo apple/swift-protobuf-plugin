@@ -32,7 +32,8 @@ SOURCES= \
 	Sources/Version.swift \
 	Sources/descriptor.pb.swift \
 	Sources/main.swift \
-	Sources/plugin.pb.swift
+	Sources/plugin.pb.swift \
+	Sources/swift-options.pb.swift
 
 # Protos from Google's source that are used for testing purposes
 GOOGLE_PROTOS= \
@@ -133,7 +134,7 @@ test: build
 # the plugin to already be built and also requires protoc to be installed.
 #
 regenerate:
-	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto
+	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto Protos/swift-options.proto
 
 #
 # Updates the various captured *.proto.request files by

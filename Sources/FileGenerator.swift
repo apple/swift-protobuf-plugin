@@ -124,6 +124,8 @@ extension Google_Protobuf_FileDescriptorProto {
     var swiftPrefix: String {
         if let p = options?.swiftPrefix {
             return p
+        } else if let p = options?.appleSwiftPrefix {
+            return p
         } else if let pkg = package, pkg != "" {
             var makeUpper = true
             var prefix = ""
