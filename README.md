@@ -14,6 +14,10 @@ For more information about Swift Protobuf, please look at:
 * [Swift Protobuf Runtime Library](https://github.com/apple/swift-protobuf-runtime)
 * [Swift Protobuf Conformance Checker](https://github.com/apple/swift-protobuf-test-conformance)
 
+Other documentation in this project:
+* API.md describes the API provided by the generated Swift code.
+* GENERATED_CODE.md describes the low-level details of the generated code.
+
 ## Getting Started
 
 If you've worked with Protocol Buffers before, adding Swift support is very simple:  you just need to build the `protoc-gen-swift` program and copy it into your PATH.  The protoc program will find and use it automatically, allowing you to build Swift sources for your proto files.  You will also, of course, need to add the corresponding Swift runtime library to your project.
@@ -107,133 +111,6 @@ This will create a file `DataModel.pb.swift` with a `struct BookInfo` and a `str
 And of course, you can define your own Swift extensions to the generated `MyLibrary` struct to augment it with additional custom capabilities.
 
 Best of all, you can take the same `DataModel.proto` file and generate Java, C++, Python, or Objective-C for use on other platforms. Those platforms can all then exchange serialized data in binary or JSON forms, with no additional effort on your part.
-
-# Generated Code
-
-The following describes how each construct in a `.proto` file gets translated into Swift language constructs:
-
-**Files:** Each input `.proto` file generates a single output file with the `.proto` extension replaced with `.pb.swift`.
-
-**Messages:** Each input message generates a single output struct that conforms to the `ProtobufMessageType` protocol.  Small leaf messages (those that don't have message-typed fields) generate simple structs.  Non-leaf messages use a private copy-on-write backing class to provide full value semantics while also supporting recursive data structures.  Nested messages generate nested struct types so that
-```
-package quux;
-message Foo {
-   message Bar {
-      int32 baz = 1;
-   }
-   Bar bar = 1;
-}
-```
-will be compiled to a structure like the following
-```
-public struct QuuxFoo {
-    // ...
-    public struct Bar {
-        // ...
-        var baz: Int32 {get set}
-        // ...
-    }
-    var bar: Bar {get set}
-    // ...
-}
-```
-which you can use as follows:
-```
-   var foo = QuuxFoo()
-   foo.bar.baz = 77
-```
-
-**Groups:** Each group within a message generates a nested struct.  The group struct implements the `ProtobufGroupType` protocol which differs from `ProtobufMessageType` primarily in how it handles serialization and deserialization (you do not normally need to be aware of this).  Note that groups are deprecated and only available with the older 'proto2' language dialect.
-
-**Binary Serialization and Deserialization:**  You can serialize to a `Data` using the `serializeProtobuf()` method or deserialize with the corresponding initializer:
-```
-init(protobuf: Data) throws
-func serializeProtobuf() throws -> Data
-```
-Protobuf binary serialization can currently only fail if the data includes Any fields that were decoded from JSON format.  See below for details.
-
-Unrecognized fields are preserved through decoding/encoding cycles for proto2 messages.  Unrecognized fields are dropped for proto3 messages.
-
-**JSON Serialization and Deserialization:**  Similarly, JSON serialization is handled by `serializeJSON()` which returns a `String` with the result.  Deserialization is handled by the corresponding initializer:
-```
-init(json: String) throws
-func serializeJSON() throws -> String
-```
-JSON serialization can fail if there are Any fields that were decoded from binary protobuf format, or if you abuse the well-known Timestamp, Duration, or FieldMask types.
-
-**Other Message Features:** All messages conform to `Hashable`, `Equatable`, and `CustomDebugStringConvertible`.  All generated objects include an `isEmpty` property that returns `true` if the object would test equal to a newly-created unmodified object.
-
-**Convenience Initializer:** Messages that have fields gain an additional convenience intializer that has an argument for every field.  The arguments are defaulted so you can specify only the ones you actually need to set.
-
-**Fields:**  Each field is compiled into a property on the struct.  Field names are converted from `snake_case` conventions in the proto file to `lowerCamelCase` property names in the Swift file.  If the result conflicts with a reserved word, an underscore will be appended to the property name.
-
-**Optional Fields:**  Optional fields generate Swift Optional properties. Such properties have a default value of `nil` unless overridden in the .proto file. You can assign `nil` to any such property to reset it to the default.  For optional fields without a default, you can test whether the field is `nil` to see if it has been set.  There is currently no way to test if optional fields that do have defaults have been set.
-
-When serializing an optional field, the field is serialized if it has been set to a non-nil value.  In particular, fields with defaults are not serialized if they have been reset by writing 'nil' but are serialized if you explicitly set them to the default value.
-
-**Required Fields:**  Required fields generate non-Optional properties.  All such properties return suitable default values when read.  If no default value is specified in the .proto, numeric fields default to zero, boolean fields default to false, string fields default to the empty string, byte fields default to the empty array, enum fields default to the appropriate default enum value, and message fields default to an empty object of that type.  Currently, required fields are always serialized, even if they have not been changed from their default.  This may change.
-
-**Repeated Fields:** Repeated fields generate array-valued properties. All such properties default to an empty array.
-
-**Map:** Map fields generate Dictionary-valued properties. When read, these properties default to an empty dictionary.  The dictionary values can be mutated directly.
-
-**Proto3 Singular Fields:**  Proto3 does not support required or optional fields.  Singular proto3 fields generate non-optional Swift properties.  These fields are initialized to the appropriate Proto3 default value (zero for numeric fields, false for booleans, etc.)  They are serialized if they have a non-default value.
-
-**Proto3 Singular message Fields:**  Proto3 singular message fields behave externally as other singular fields.  In particular, reading such a field returns a valid empty message object by default.  Internally, however, singular message fields are in fact stored as Swift optionals, but this is only done as an optimization and is not visible to clients.
-
-**Enums:** Each enum in the proto file generates a Swift enum that implements RawRepresentable with a base type of Int. The enum is nested within an enclosing message, if any. The enum contains the specified cases from the source .proto plus an extra `UNRECOGNIZED(Int)` case that is used to carry unknown enum values when decoding binary protobuf format.  Enums with duplicate cases (more than one case with the same integer value) are fully supported.
-
-**Oneof:** Each oneof field generates an enum with a case for each field in the oneof block. The containing message provides an accessor for the oneof field itself that allows you to set or get the enum value directly and allows you to use a `switch` or `if case` statement to conditionally handle the contents. The containing message also provides shortcut accessors for each field in the oneof that will return the corresponding value if present or `nil` if that value is not present.
-
-**Reflection:**  The standard Swift Mirror() facility can be used to inspect the fields on generated messages.  Fields appear in the reflection if they would be serialized.  In particular, proto2 required fields are always included, proto2 optional fields are included if they are non-nil, and proto3 singular fields are included if they do not have a default value.
-
-**Extensions:**  Each extension in a proto file generates two distinct components:
-
-* An extension object that defines the type, field number, and other properties of the extension.  This is defined at a scope corresponding to where the proto extension was defined.
-
-* A Swift extension of the message struct that provides natural property access for the extension value on that message struct.
-
-Each generated Swift file that defines extensions also has a static constant holding a ProtobufExtensionSet with all extensions declared in that file.
-
-To decode a message with extensions, you need to first obtain or construct a ProtobufExtensionSet holding extension objects for all of the extensions you want to support.  A single ProtobufExtensionSet can hold any number of extensions for any number of messages.  You then provide this set to the deserializing initializer which will use it to identify and deserialize extension fields.
-
-You need do nothing special to have extension values properly serialized.
-
-To set or read extension properties, you simply use the standard property access.
-
-Caveat:  Extensions are not available in proto3.
-
-**Any:**  The Any message type is included in the runtime package as `Google_Protobuf_Any`.  You can construct a message from a `Google_Protobuf_Any` value via a convenience initializer available on any ProtobufMessageType: `init?(any: Google_Protobuf_Any)`.  You can similarly construct a `Google_Protobuf_Any` object from any message using `Google_Protobuf_Any(message: ProtobufMessageType)`.  To support this, each generated message includes a property `anyTypeURL` containing the URL for that message type.  This URL is included in the Any object when one is constructed from a message, and is checked when constructing a message from an Any.  Caveat:  Although Any fields can be encoded in both binary protobuf and JSON, Google's spec places limits on translations between these two codings.  As a result, you should be careful with Any fields if you expect to use both JSON and protobuf encodings.
-
-**Well-known types:**  Google has defined a number of "well-known types" as part of proto3.  These are predefined messages that support common idioms.  These well-known types are precompiled and bundled into the Swift runtime:
-
-| Proto Type                  |  Swift Type               |
-| -------------------------   | -----------------------   |
-| google.protobuf.Any         | Google_Protobuf_Any         |
-| google.protobuf.Api         | Google_Protobuf_Api         |
-| google.protobuf.BoolValue   | Google_Protobuf_BoolValue   |
-| google.protobuf.BytesValue  | Google_Protobuf_BytesValue  |
-| google.protobuf.DoubleValue | Google_Protobuf_DoubleValue |
-| google.protobuf.Duration    | Google_Protobuf_Duration    |
-| google.protobuf.Empty       | Google_Protobuf_Empty       |
-| google.protobuf.FieldMask   | Google_Protobuf_FieldMask   |
-| google.protobuf.FloatValue  | Google_Protobuf_FloatValue  |
-| google.protobuf.Int64Value  | Google_Protobuf_Int64Value  |
-| google.protobuf.ListValue   | Google_Protobuf_ListValue   |
-| google.protobuf.StringValue | Google_Protobuf_StringValue |
-| google.protobuf.Struct      | Google_Protobuf_Struct      |
-| google.protobuf.Timestamp   | Google_Protobuf_Timestamp   |
-| google.protobuf.Type        | Google_Protobuf_Type        |
-| google.protobuf.UInt32Value | Google_Protobuf_UInt32Value |
-| google.protobuf.UInt64Value | Google_Protobuf_UInt64Value |
-| google.protobuf.Value       | Google_Protobuf_Value       |
-
-
-To use the well-known types in your own protos, you will need to have the corresponding protos available so you can `import` them into your proto file.  However, the compiled forms of these types are already available in the library; you do not need to compile them or do anything to use them other than `import Protobuf`.
-
-## Aside:  proto2 vs. proto3
-
-The terms *proto2* and *proto3* refer to two different dialects of the proto *language.*  The older proto2 language dates back to 2008, the proto3 language was introduced in 2015.  These should not be confused with versions of the protobuf *project* or the protoc *program*.  In particular, the protoc 3.0 program has solid support for both proto2 and proto3 language dialects.  Many people continue to use the proto2 language with protoc 3.0 because they have existing systems that depend on particular features of the proto2 language that were changed in proto3.
 
 # Examples
 
@@ -423,7 +300,8 @@ m.serializeProtobuf()
 ## Swift Options
 
 ```
-option swift_prefix=<prefix> (no default)
+import "swift-options.proto";
+option (apple_swift_prefix)=<prefix> (no default)
 ```
 
 This value will be prepended to all struct, class, and enums that are
@@ -433,16 +311,13 @@ converting each package element to UpperCamelCase and combining them
 with underscores.  For example, the package "foo_bar.baz" would lead
 to a default Swift prefix of "FooBar_Baz_".
 
-**CAVEAT:** The option above must be recognized by protoc when
-it parses the proto file.  Older versions of protoc do not recognize
-this option, cannot parse it, and will not pass it to the
-code generator.  You may need to patch the protoc sources in
-order to use these options.  (Patching protoc involves adding
-two lines to descriptor.proto and then running a shell script
-to regenerate protoc's support files before recompiling.  A
-standard patch file to help with this is provided as part of the
-swift-protobuf-plugin project.)
+**CAVEAT:** This requires you have `swift-options.proto`
+available when you run protoc.
 
+We are discussing with Google adding a standard `option swift_prefix`
+that would have the same behavior but without this requirement.
+If that happens, the plugin will be updated to support both
+the `option (apple_swift_prefix)` and `option swift_prefix`.
 
 # TODO
 
