@@ -145,7 +145,8 @@ GOOGLE_PROTOS= \
 # Extra test Protos used to validate various features
 # All are in Protos/test
 TEST_PROTOS= \
-	option_apple_swift_prefix
+	option_apple_swift_prefix \
+	test_names
 
 .PHONY: default all build check clean install test update update-ref
 

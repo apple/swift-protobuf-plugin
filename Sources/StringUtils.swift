@@ -106,15 +106,6 @@ private func uppercaseFirst(_ s: String) -> String {
     }
 }
 
-private func lowercaseFirst(_ s: String) -> String {
-    var out = s.characters
-    if let first = out.popFirst() {
-        return String(first).lowercased() + String(out)
-    } else {
-        return s
-    }
-}
-
 /// Only allow ASCII alphanumerics and underscore.
 private func basicSanitize(_ s: String) -> String {
     var out = ""
@@ -163,7 +154,21 @@ func toUpperCamelCase(_ s: String) -> String {
 }
 
 func toLowerCamelCase(_ s: String) -> String {
-    return lowercaseFirst(toUpperCamelCase(s))
+    var out = ""
+    let t = splitIdentifier(s)
+    // Lowercase the first letter/word
+    var forceLower = true
+    for word in t {
+        if forceLower {
+            out.append(basicSanitize(word).lowercased())
+        } else if upperInitials.contains(word) {
+            out.append(word.uppercased())
+        } else {
+            out.append(uppercaseFirst(basicSanitize(word)))
+        }
+        forceLower = false
+    }
+    return out
 }
 
 ///
