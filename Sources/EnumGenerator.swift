@@ -83,8 +83,7 @@ extension Google_Protobuf_EnumDescriptorProto {
                 return f.getSwiftName(stripLength: stripLength)
             }
         }
-        Stderr.print("Cannot find case `\(caseName)` in enum \(name!)")
-        precondition(false)
+        fatalError("Cannot find case `\(caseName)` in enum \(name!)")
     }
 }
 

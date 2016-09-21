@@ -67,7 +67,7 @@ extension CodeGeneratorRequest {
                 return m
             }
         }
-        precondition(false)
+        fatalError("Unable to locate Enum case \(caseName) in path \(path)")
     }
 }
 
