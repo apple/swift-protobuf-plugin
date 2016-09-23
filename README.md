@@ -15,8 +15,8 @@ For more information about Swift Protobuf, please look at:
 * [Swift Protobuf Conformance Checker](https://github.com/apple/swift-protobuf-test-conformance)
 
 Other documentation in this project:
-* API.md describes the API provided by the generated Swift code.
-* GENERATED_CODE.md describes the low-level details of the generated code.
+* [API.md](API.md) describes the API provided by the generated Swift code.
+* [GENERATED_CODE.md](GENERATED_CODE.md) describes the low-level details of the generated code.
 
 ## Getting Started
 
