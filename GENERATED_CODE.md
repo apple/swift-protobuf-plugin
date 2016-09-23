@@ -18,7 +18,7 @@ The generated message structs follow one of several different patterns regarding
 The simplest pattern is for small proto3 messages that have only basic
 field types.
 For example, consider the following:
-```
+```protobuf
 syntax = "proto3";
 message Foo {
    int32 field1 = 1;
@@ -26,7 +26,7 @@ message Foo {
 }
 ```
 For these, we can generate a simple struct with the expected public properties:
-```
+```swift
 struct Foo {
    public var field1: Int32 = 0
    public var field2: String = ""
@@ -36,7 +36,7 @@ struct Foo {
 
 We can use a similarly simple structure for proto2 messages that only have optional fields with basic field types.
 Consider the proto2 analog of the previous example:
-```
+```protobuf
 syntax = "proto2";
 message Foo {
    optional int32 field1 = 1;
@@ -44,7 +44,7 @@ message Foo {
 }
 ```
 This translates into almost the same structure, except that the fields have a slightly different type:
-```
+```swift
 struct Foo {
    public var field1: Int32? = nil
    public var fiel2: String? = nil
@@ -54,7 +54,7 @@ struct Foo {
 If there are default values, we want to ensure that users can reset the field by assigning nil.
 In particular, we cannot just change the initialization of the fields above, we need an additional layer of structure.
 Here's a simple example where the optional fields have default values:
-```
+```protobuf
 syntax = "proto2";
 message Foo {
     optional int32 field1 = 1 [default = 17];
@@ -63,7 +63,7 @@ message Foo {
 ```
 This gets translated into a private optional and a computed accessor that translates nil into the default.
 With this structure, you can simply assign nil to the field to reset it to the default:
-```
+```swift
 struct Foo {
   private var _field1: Int32? = nil
   public var field1: Int32? {
@@ -84,7 +84,7 @@ Repeated and map fields are handled similarly, except that they cannot have defa
 ### Message-valued Fields
 
 Protobuf allows recursive structures such as the following:
-```
+```protobuf
 syntax = "proto3";
 message Foo {
    Foo fooField = 1;
@@ -93,7 +93,7 @@ message Foo {
 
 The simple patterns above cannot correctly handle this because Swift does not permit recursive structs.
 To correctly model this, we need to store `fooField` in a separate storage class that will be allocated on the heap:
-```
+```swift
 struct Foo {
   private class _StorageClass {
     var _fooField: Foo? = nil
@@ -111,7 +111,7 @@ struct Foo {
 
 With this structure, setting a value for `fooField` will cause a new `_StorageClass` to be allocated on the heap and the value will be stored there.
 The `_uniqueStorage()` method is a standard template that provides standard Swift copy-on-write behaviors:
-```
+```swift
   private mutating func _uniqueStorage() -> _StorageClass {
     if _storage == nil {
       _storage = _StorageClass()
@@ -137,7 +137,7 @@ There might be cases where it makes more sense to put some fields directly into 
 Each generated struct has a collection of computed variables that return basic information about the struct.
 
 Here is the actual first part of the generated code for `message Foo` above:
-```
+```swift
 public struct Foo: ProtobufGeneratedMessage {
   public var swiftClassName: String {return "Foo"}
   public var protoMessageName: String {return "Foo"}
@@ -161,7 +161,7 @@ The serialization support is based on a traversal mechanism (also known as "The 
 The various serialization systems in the runtime library construct objects that conform to the `ProtobufVisitor` protocol and then invoke the `traverse()` method which will provide the visitor with a look at every non-empty field.
 
 As above, this varies slightly depending on the proto language dialect, so let's start with a proto3 example:
-```
+```protobuf
 syntax= "proto3";
 message Foo {
   int32 field1 = 1;
@@ -174,7 +174,7 @@ message Foo {
 
 This generates a storage class, of course.
 When the serializer invokes `traverse()` on the struct, it simply passes the visitor to `traverse()` on the storage class, which looks like this:
-```
+```swift
   private class _StorageClass {
     var _field1: Int32 = 0
     var _field2: Int32 = 0
@@ -225,7 +225,7 @@ Deserialization is a rather complex process overall, though the generated code i
 
 The core of the deserialization machinery rests on the generated `decodeField` method.
 Here is the `decodeField` method for the example just above:
-```
+```swift
   private class _StorageClass {
     var _field1: Int32 = 0
     var _field2: Int32 = 0
