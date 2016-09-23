@@ -61,7 +61,7 @@ protoc-gen-swift 0.9.12
 ```
 
 And then add a dependency to your Package.swift file.  Adjust the `Version()` here to match the `protoc-gen-swift` version you checked above:
-```
+``` swift
 dependencies: [
         .Package(url: "https://github.com/apple/swift-protobuf-runtime.git", Version(0,9,12))
 ]
@@ -76,7 +76,7 @@ If you are using Xcode, then you should:
 
 Here is a quick example to illustrate how you can use Swift Protocol Buffers in your program, and why you might want to.  Create a file `DataModel.proto` with the following contents:
 
-```
+``` protobuf
 syntax = "proto3";
 
 message BookInfo {
@@ -120,7 +120,7 @@ Following are a number of examples demonstrating how to use the code generated b
 
 Consider this simple proto file:
 
-```
+``` protobuf
 // file foo.proto
 package project.basics;
 syntax = "proto3";
@@ -135,7 +135,7 @@ After running protoc, you will have a Swift source file `foo.pb.swift` that cont
 
 You can use the generated struct much as you would any other struct.  It has properties corresponding to the fields defined in the proto.  You can provide values for those properties in the initializer as well:
 
-```
+``` swift
 var foo = Project_Basics_Foo(id: 12)
 foo.label = "Excellent"
 foo.alternates = ["Good", "Better", "Best"]
@@ -143,7 +143,7 @@ foo.alternates = ["Good", "Better", "Best"]
 
 The generated struct also includes standard definitions of hashValue, equality, and other basic utility methods:
 
-```
+``` swift
 if foo.isEmpty {
     // Initialize foo
 }
@@ -154,7 +154,7 @@ foos.insert(foo)
 
 You can serialize the object to a compact binary protobuf format or a legible JSON format:
 
-```
+``` swift
 print(try foo.serializeJSON())
 network.write(try foo.serializeProtobuf())
 ```
@@ -163,7 +163,7 @@ network.write(try foo.serializeProtobuf())
 
 Conversely, if you have a string containing a JSON or protobuf serialized form, you can convert it back into an object using the generated initializers:
 
-```
+``` swift
 let foo1 = try Project_Basics_Foo(json: inputString)
 let foo2 = try Project_Basics_Foo(protobuf: inputBytes)
 ```
@@ -174,7 +174,7 @@ You can customize the generated structs by using Swift extensions.
 
 Most obviously, you can add new methods as necessary:
 
-```
+``` swift
 extension Project_Basics_Foo {
    mutating func invert() {
       id = 1000 - id
@@ -185,7 +185,7 @@ extension Project_Basics_Foo {
 
 For very specialized applications, you can also override the generated methods in this way.  For example, if you want to change how the `hashValue` property is computed, you can redefine it as follows:
 
-```
+``` swift
 extension Project_Basics_Foo {
    // I only want to hash based on the id.
    var hashValue: Int { return Int(id) }
@@ -210,7 +210,7 @@ To see how this is used, you might examine the ProtobufRuntime implementation of
 ## Generated JSON serializers
 
 Consider the following simple proto file:
-```
+``` protobuf
 message Foo {
   int32 id = 1;
   string name = 2;
@@ -219,7 +219,7 @@ message Foo {
 ```
 
 A typical JSON message might look like the following:
-```
+``` json
 {
   "id": 1732789,
   "name": "Alice",
@@ -230,14 +230,14 @@ A typical JSON message might look like the following:
 In particular, note that the "my_my" field name in the proto file gets translated to "myMy" in the JSON serialized form.  You can override this with a `json_name` property on fields as needed.
 
 To decode such a message, you would use Swift code similar to the following
-```
+``` swift
 let jsonString = ... string read from somewhere ...
 let f = try Foo(json: jsonString)
 print("id: \(f.id)  name: \(f.name)  myMy: \(f.myMy)")
 ```
 
 Similarly, you can serialize a message object in memory to a JSON string
-```
+``` swift
 let f = Foo(id: 777, name: "Bob")
 let json = try f.serializeJSON()
 print("json: \(json)")
@@ -254,7 +254,7 @@ print("json: \(json)")
 
 Suppose you have the following simple proto file defining a message Foo:
 
-```
+``` protobuf
 // file base.proto
 package my.project;
 message Foo {
@@ -264,7 +264,7 @@ message Foo {
 
 And suppose another file defines an extension of that message:
 
-```
+``` protobuf
 // file more.proto
 package my.project;
 extend Foo {
@@ -276,7 +276,7 @@ As described above, protoc will create an extension object in more.pb.swift and 
 
 You can decode a Foo message containing this extension as follows.  Note that the extension object here includes the package name and the name of the message being extended:
 
-```
+``` swift
 let extensions: ProtobufExtensionSet = [My_Project_Foo_extraInfo]
 let m = My_Project_Foo(protobuf: data, extensions: extensions)
 print(m.extraInfo)
@@ -284,14 +284,14 @@ print(m.extraInfo)
 
 If you had many extensions defined in bar.proto, you can avoid having to list them all yourself by using the preconstructed extension set included in the generated file.  Note that the name of the preconstructed set includes the package name and the name of the input file to ensure that extensions from different files do not collide:
 
-```
+``` swift
 let extensions = Project_Additions_More_Extensions
 let m = My_Project_Foo(protobuf: data, extensions: extensions)
 ```
 
 To serialize an extension value, just set the value on the message and serialize the result as usual:
 
-```
+``` swift
 var m = My_Project_Foo()
 m.extraInfo = 12
 m.serializeProtobuf()
@@ -299,7 +299,7 @@ m.serializeProtobuf()
 
 ## Swift Options
 
-```
+``` swift
 import "swift-options.proto";
 option (apple_swift_prefix)=<prefix> (no default)
 ```
@@ -339,7 +339,7 @@ This implementation fully supports JSON encoding for proto2 types. Google has no
 The protobuf serializer currently always writes all required fields in proto2 messages. This differs from the behavior of Google's C++ and Java implementations, which omit required fields that have not been set or whose value is the default.  This may change.
 
 Unlike proto2, proto3 does not provide a standard way to tell if a field has "been set" or not.  This is standard proto3 behavior across all languages and implementations.  If you need to distinguish an empty field, you can model this in proto3 using a oneof group with a single element:
-```
+``` protobuf
 message Foo {
   oneof HasName {
      string name = 432;
