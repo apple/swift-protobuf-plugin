@@ -73,7 +73,7 @@ struct Foo {
 
   private var _field2: String? = nil
   public var field2: String? {
-    get {return _field2 ?? "foo"}
+    get {return _field2 ?? "hello"}
     set {_field2 = newValue}
   }
 }
