@@ -22,8 +22,9 @@
 ///     reference is never stored locally.
 ///
 // -----------------------------------------------------------------------------
-import Protobuf
 import Foundation
+import PluginLibrary
+import Protobuf
 
 /*
  * A tool for looking up information about various types within

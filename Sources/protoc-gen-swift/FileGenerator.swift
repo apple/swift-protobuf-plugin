@@ -17,6 +17,7 @@
 ///
 // -----------------------------------------------------------------------------
 import Foundation
+import PluginLibrary
 import Protobuf
 
 ///
@@ -318,7 +319,7 @@ class FileGenerator {
         if !registry.isEmpty {
             let filename = toUpperCamelCase(baseFilename)
             p.print("\n")
-            p.print("let \(descriptor.swiftPrefix)\(filename)_Extensions: ProtobufExtensionSet = [\n")
+            p.print("public let \(descriptor.swiftPrefix)\(filename)_Extensions: ProtobufExtensionSet = [\n")
             p.indent()
             var separator = ""
             for e in registry {

@@ -14,6 +14,7 @@
 ///
 // -----------------------------------------------------------------------------
 import Foundation
+import PluginLibrary
 import Protobuf
 
 ///

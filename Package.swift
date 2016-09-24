@@ -6,6 +6,10 @@ import PackageDescription
 
 let package = Package(
         name: "protoc-gen-swift",
+        targets: [
+            Target(name: "protoc-gen-swift",
+                   dependencies: ["PluginLibrary"])
+        ],
         dependencies: [
           .Package(
               url: "https://github.com/apple/swift-protobuf-runtime.git",

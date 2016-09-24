@@ -15,6 +15,7 @@
 ///
 // -----------------------------------------------------------------------------
 import Foundation
+import PluginLibrary
 import Protobuf
 
 extension Google_Protobuf_OneofDescriptorProto {

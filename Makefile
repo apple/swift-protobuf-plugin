@@ -88,10 +88,10 @@ SOURCES= \
 	Sources/protoc-gen-swift/ReservedWords.swift \
 	Sources/protoc-gen-swift/StringUtils.swift \
 	Sources/protoc-gen-swift/Version.swift \
-	Sources/protoc-gen-swift/descriptor.pb.swift \
 	Sources/protoc-gen-swift/main.swift \
-	Sources/protoc-gen-swift/plugin.pb.swift \
-	Sources/protoc-gen-swift/swift-options.pb.swift
+	Sources/PluginLibrary/descriptor.pb.swift \
+	Sources/PluginLibrary/plugin.pb.swift \
+	Sources/PluginLibrary/swift-options.pb.swift
 
 .PHONY: default all build check clean install test update update-ref
 
@@ -165,7 +165,7 @@ reference: build
 # the plugin to already be built and also requires protoc to be installed.
 #
 regenerate:
-	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources/protoc-gen-swift -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto Protos/swift-options.proto
+	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources/PluginLibrary -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto Protos/swift-options.proto
 
 #
 # Updates the local copy of Google protos that we need for the plugin.

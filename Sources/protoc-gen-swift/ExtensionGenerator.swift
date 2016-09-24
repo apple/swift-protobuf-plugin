@@ -17,6 +17,7 @@
 ///
 // -----------------------------------------------------------------------------
 import Foundation
+import PluginLibrary
 import Protobuf
 
 struct ExtensionGenerator {
@@ -114,7 +115,7 @@ struct ExtensionGenerator {
         if comments != "" {
             p.print(comments)
         }
-        p.print("var \(swiftFieldName): \(apiType) {\n")
+        p.print("public var \(swiftFieldName): \(apiType) {\n")
         p.indent()
         p.print("get {return getExtensionValue(ext: \(swiftFullExtensionName))}\n")
         p.print("set {setExtensionValue(ext: \(swiftFullExtensionName), value: newValue)}\n")

@@ -22,6 +22,7 @@
 // -----------------------------------------------------------------------------
 
 import Foundation
+import PluginLibrary
 
 enum MyError: Error {
     case failure
