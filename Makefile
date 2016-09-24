@@ -76,22 +76,22 @@ PROTOC_GEN_SWIFT=.build/debug/protoc-gen-swift
 
 # Source code for the plugin
 SOURCES= \
-	Sources/CodePrinter.swift \
-	Sources/Context.swift \
-	Sources/EnumGenerator.swift \
-	Sources/ExtensionGenerator.swift \
-	Sources/FileGenerator.swift \
-	Sources/FileIo.swift \
-	Sources/MessageFieldGenerator.swift \
-	Sources/MessageGenerator.swift \
-	Sources/OneofGenerator.swift \
-	Sources/ReservedWords.swift \
-	Sources/StringUtils.swift \
-	Sources/Version.swift \
-	Sources/descriptor.pb.swift \
-	Sources/main.swift \
-	Sources/plugin.pb.swift \
-	Sources/swift-options.pb.swift
+	Sources/protoc-gen-swift/CodePrinter.swift \
+	Sources/protoc-gen-swift/Context.swift \
+	Sources/protoc-gen-swift/EnumGenerator.swift \
+	Sources/protoc-gen-swift/ExtensionGenerator.swift \
+	Sources/protoc-gen-swift/FileGenerator.swift \
+	Sources/protoc-gen-swift/FileIo.swift \
+	Sources/protoc-gen-swift/MessageFieldGenerator.swift \
+	Sources/protoc-gen-swift/MessageGenerator.swift \
+	Sources/protoc-gen-swift/OneofGenerator.swift \
+	Sources/protoc-gen-swift/ReservedWords.swift \
+	Sources/protoc-gen-swift/StringUtils.swift \
+	Sources/protoc-gen-swift/Version.swift \
+	Sources/protoc-gen-swift/descriptor.pb.swift \
+	Sources/protoc-gen-swift/main.swift \
+	Sources/protoc-gen-swift/plugin.pb.swift \
+	Sources/protoc-gen-swift/swift-options.pb.swift
 
 .PHONY: default all build check clean install test update update-ref
 
@@ -165,7 +165,7 @@ reference: build
 # the plugin to already be built and also requires protoc to be installed.
 #
 regenerate:
-	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto Protos/swift-options.proto
+	${PROTOC} --plugin=$(PROTOC_GEN_SWIFT) --swift_out=Sources/protoc-gen-swift -I Protos Protos/google/protobuf/descriptor.proto Protos/google/protobuf/compiler/plugin.proto Protos/swift-options.proto
 
 #
 # Updates the local copy of Google protos that we need for the plugin.
