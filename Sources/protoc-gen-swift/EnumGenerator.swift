@@ -15,7 +15,7 @@
 // -----------------------------------------------------------------------------
 import Foundation
 import PluginLibrary
-import Protobuf
+import SwiftProtobuf
 
 ///
 /// Extend the EnumValueDescriptorProto with some helper

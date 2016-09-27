@@ -40,7 +40,7 @@
 //  This is like unittest.proto but with optimize_for = LITE_RUNTIME.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum ProtobufUnittest_ForeignEnumLite: ProtobufEnum {

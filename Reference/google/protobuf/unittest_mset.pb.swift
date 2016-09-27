@@ -43,7 +43,7 @@
 //  have a TestMessageSet, so it can be downgraded to proto1.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public struct ProtobufUnittest_TestMessageSetContainer: ProtobufGeneratedMessage {

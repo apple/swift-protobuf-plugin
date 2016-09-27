@@ -44,7 +44,7 @@
 //  impact against baseline (non-arena) google.protobuf.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum ProtobufUnittestNoArena_ForeignEnum: ProtobufEnum {

@@ -16,7 +16,7 @@
 // -----------------------------------------------------------------------------
 import Foundation
 import PluginLibrary
-import Protobuf
+import SwiftProtobuf
 
 extension Google_Protobuf_OneofDescriptorProto {
     var swiftFieldName: String {

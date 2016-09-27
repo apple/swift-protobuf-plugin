@@ -18,7 +18,7 @@
 // -----------------------------------------------------------------------------
 import Foundation
 import PluginLibrary
-import Protobuf
+import SwiftProtobuf
 
 struct ExtensionGenerator {
     let descriptor: Google_Protobuf_FieldDescriptorProto

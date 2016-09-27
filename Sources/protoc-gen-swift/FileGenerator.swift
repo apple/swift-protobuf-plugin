@@ -18,7 +18,7 @@
 // -----------------------------------------------------------------------------
 import Foundation
 import PluginLibrary
-import Protobuf
+import SwiftProtobuf
 
 ///
 /// Extend the FileDescriptorProto with some utility
@@ -261,7 +261,7 @@ class FileGenerator {
 
         p.print(
             "import Foundation\n",
-            "import Protobuf\n",
+            "import SwiftProtobuf\n",
             "\n")
 
         var enums = [EnumGenerator]()

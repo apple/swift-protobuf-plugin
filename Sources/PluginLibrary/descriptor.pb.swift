@@ -44,7 +44,7 @@
 //  without any other information (e.g. without reading its imports).
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 ///   The protocol compiler can output a FileDescriptorSet containing the .proto

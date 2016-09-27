@@ -17,7 +17,7 @@
 // -----------------------------------------------------------------------------
 import Foundation
 import PluginLibrary
-import Protobuf
+import SwiftProtobuf
 
 extension Google_Protobuf_DescriptorProto {
     func getMessageForPath(path: String, parentPath: String) -> Google_Protobuf_DescriptorProto? {

@@ -7,7 +7,7 @@
  */
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 ///   Test that we can include all well-known types.

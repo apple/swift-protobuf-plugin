@@ -175,6 +175,6 @@ regenerate:
 # reference files after doing this.
 update:
 	ABS_PBDIR=`cd ${PROTOBUF_PROJECT_DIR}; pwd`; \
-	cp $${ABS_PBDIR}/src/google/protobuf/descriptor.proto Protos/google/protobuf/
+	cp $${ABS_PBDIR}/src/google/protobuf/descriptor.proto Protos/google/protobuf/; \
 	cp $${ABS_PBDIR}/src/google/protobuf/compiler/plugin.proto Protos/google/protobuf/compiler
 

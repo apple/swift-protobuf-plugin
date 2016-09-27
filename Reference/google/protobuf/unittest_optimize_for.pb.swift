@@ -42,7 +42,7 @@
 //  A proto file which uses optimize_for = CODE_SIZE.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public struct ProtobufUnittest_TestOptimizedForSize: ProtobufGeneratedMessage, ProtobufExtensibleMessage {

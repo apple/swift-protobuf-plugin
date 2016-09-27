@@ -42,7 +42,7 @@
 //  This file contains messages for testing message_set_wire_format.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 ///   A message with message_set_wire_format.

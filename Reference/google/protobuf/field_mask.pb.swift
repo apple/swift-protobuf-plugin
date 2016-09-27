@@ -37,7 +37,7 @@
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 ///   `FieldMask` represents a set of symbolic field paths, for example:

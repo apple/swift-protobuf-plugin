@@ -52,7 +52,7 @@
 //  flag "--${NAME}_out" is passed to protoc.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 ///   An encoded CodeGeneratorRequest is written to the plugin's stdin.

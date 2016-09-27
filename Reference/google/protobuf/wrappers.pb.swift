@@ -41,7 +41,7 @@
 //  typed field and its default value.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 ///   Wrapper message for `double`.

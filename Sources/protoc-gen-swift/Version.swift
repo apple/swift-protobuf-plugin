@@ -17,7 +17,7 @@
 struct Version {
     static let major = 0
     static let minor = 9
-    static let revision = 21
+    static let revision = 22
     static let versionString = "\(major).\(minor).\(revision)"
     static let name = "protoc-gen-swift"
     static let versionedName = "protoc-gen-swift \(versionString)"
@@ -34,8 +34,17 @@ struct Version {
                + "In particular, if you have renamed this program, you will need to\n"
                + "adjust the protoc command-line option accordingly.\n"
                + "\n"
-               + "The generated Swift output requires the SwiftProtobufRuntime \(versionString)\n"
+               + "The generated Swift output requires the SwiftProtobuf \(versionString)\n"
                + "library be included in your project.\n"
+               + "\n"
+               + "If you use `swift build` to compiler your project, add this to\n"
+               + "Package.swift:\n"
+               + "\n"
+               + "   dependencies: [\n"
+               + "     .Package(url: \"https://github.com/apple/swift-protobuf-runtime.git\",\n"
+               + "              Version(\(major),\(minor),\(revision))\n"
+               + "   ]\n"
+               + "\n"
                + "\n"
                + "Usage: protoc-gen-swift [options] [filename...]\n"
                + "\n"

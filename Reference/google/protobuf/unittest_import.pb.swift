@@ -42,7 +42,7 @@
 //  A proto file which is imported by unittest.proto to test importing.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum ProtobufUnittestImport_ImportEnum: ProtobufEnum {

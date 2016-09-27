@@ -43,5 +43,5 @@
 //  correctly.)
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 

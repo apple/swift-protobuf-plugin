@@ -24,7 +24,7 @@
 // -----------------------------------------------------------------------------
 import Foundation
 import PluginLibrary
-import Protobuf
+import SwiftProtobuf
 
 /*
  * A tool for looking up information about various types within

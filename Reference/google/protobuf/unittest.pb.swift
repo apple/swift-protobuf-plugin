@@ -42,7 +42,7 @@
 //  A proto file we will use for unit testing.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum ProtobufUnittest_ForeignEnum: ProtobufEnum {

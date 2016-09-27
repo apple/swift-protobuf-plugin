@@ -40,7 +40,7 @@
 //  Tests that a "lite" message can import a regular message.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public struct ProtobufUnittest_TestLiteImportsNonlite: ProtobufGeneratedMessage {

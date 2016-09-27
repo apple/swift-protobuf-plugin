@@ -44,7 +44,7 @@
 ///   required fields in proto3.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum ProtobufUnittest_MapEnum: ProtobufEnum {

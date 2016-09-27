@@ -42,7 +42,7 @@
 //  A proto file used to test the "custom options" feature of google.protobuf.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum ProtobufUnittest_MethodOpt1: ProtobufEnum {

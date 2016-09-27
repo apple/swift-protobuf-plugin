@@ -7,7 +7,7 @@
  */
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public struct Swift_Protobuf_Test_NamesTest: ProtobufGeneratedMessage {

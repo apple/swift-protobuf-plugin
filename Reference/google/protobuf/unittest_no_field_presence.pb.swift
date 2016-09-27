@@ -38,7 +38,7 @@
 //  A proto file used to test a message type with no explicit field presence.
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum Proto2NofieldpresenceUnittest_ForeignEnum: ProtobufEnum {

@@ -38,7 +38,7 @@
 //  Author: kenton@google.com (Kenton Varda)
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public enum Google_Protobuf_NoGenericServicesTest_TestEnum: ProtobufEnum {

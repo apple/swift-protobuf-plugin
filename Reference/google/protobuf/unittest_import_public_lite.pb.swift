@@ -38,7 +38,7 @@
 //  Author: liujisi@google.com (Pherl Liu)
 
 import Foundation
-import Protobuf
+import SwiftProtobuf
 
 
 public struct ProtobufUnittestImport_PublicImportMessageLite: ProtobufGeneratedMessage {
